@@ -1,0 +1,28 @@
+{
+  "name": "godaddy-api",
+  "version": "1.0.0",
+  "description": "GoDaddy API generated from https://developer.godaddy.com/doc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Godaddy",
+    "API"
+  ],
+  "author": "Hasan Kumar",
+  "license": "MIT",
+  "devDependencies": {
+    "supertest": "^3.0.0",
+    "swagger-js-codegen": "^1.10.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mintuhouse/godaddy-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mintuhouse/godaddy-api/issues"
+  },
+  "homepage": "https://github.com/mintuhouse/godaddy-api#readme"
+}
