@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const upperCamelCase = require('uppercamelcase');
+const camelCase = require("camelcase");
 const CodeGen = require('swagger-js-codegen').CodeGen;
 
 const godaddySwaggerFile = 'https://developer.godaddy.com/swagger/doc/resources';
@@ -70,12 +70,7 @@ const downloadSwagger = async() => {
       console.log('Generated ' + dest);
 
       var unversionedPath = path.slice('4');
-      if (unversionedPath.indexOf('/') == -1) {
-        var className = upperCamelCase(unversionedPath);
-      } else {
-        var cm = unversionedPath.split('/');
-        var className = upperCamelCase(cm[0]) + upperCamelCase(cm[1]);
-      }
+      var className = camelCase(unversionedPath.replace('/', '-'));
       codegen.push({
         swagger: dest,
         className: className,

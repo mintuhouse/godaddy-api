@@ -2,7 +2,7 @@
   "apis": [
     {
       "swagger": "swagger/v1/abuse/tickets.json",
-      "className": "AbuseTickets",
+      "className": "abuseTickets",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -17,7 +17,7 @@
     },
     {
       "swagger": "swagger/v1/aftermarket/listings.json",
-      "className": "AftermarketListings",
+      "className": "aftermarketListings",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -32,7 +32,7 @@
     },
     {
       "swagger": "swagger/v1/agreements.json",
-      "className": "Agreements",
+      "className": "agreements",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -47,7 +47,7 @@
     },
     {
       "swagger": "swagger/v1/cart.json",
-      "className": "Cart",
+      "className": "cart",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -62,7 +62,7 @@
     },
     {
       "swagger": "swagger/v1/certificates.json",
-      "className": "Certificates",
+      "className": "certificates",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -77,7 +77,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/addresses.json",
-      "className": "CloudAddresses",
+      "className": "cloudAddresses",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -92,7 +92,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/applications.json",
-      "className": "CloudApplications",
+      "className": "cloudApplications",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -107,7 +107,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/dataCenters.json",
-      "className": "CloudDataCenters",
+      "className": "cloudDataCenters",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -122,7 +122,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/emailPreferences.json",
-      "className": "CloudEmailPreferences",
+      "className": "cloudEmailPreferences",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -137,7 +137,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/images.json",
-      "className": "CloudImages",
+      "className": "cloudImages",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -152,7 +152,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/limits.json",
-      "className": "CloudLimits",
+      "className": "cloudLimits",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -167,7 +167,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/servers.json",
-      "className": "CloudServers",
+      "className": "cloudServers",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -182,7 +182,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/specs.json",
-      "className": "CloudSpecs",
+      "className": "cloudSpecs",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -197,7 +197,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/sshKeys.json",
-      "className": "CloudSshKeys",
+      "className": "cloudSshKeys",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -212,7 +212,7 @@
     },
     {
       "swagger": "swagger/v1/cloud/usage.json",
-      "className": "CloudUsage",
+      "className": "cloudUsage",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -227,7 +227,7 @@
     },
     {
       "swagger": "swagger/v1/countries.json",
-      "className": "Countries",
+      "className": "countries",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -242,7 +242,7 @@
     },
     {
       "swagger": "swagger/v1/domains.json",
-      "className": "Domains",
+      "className": "domains",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -257,7 +257,7 @@
     },
     {
       "swagger": "swagger/v1/orders.json",
-      "className": "Orders",
+      "className": "orders",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -272,7 +272,7 @@
     },
     {
       "swagger": "swagger/v1/shoppers.json",
-      "className": "Shoppers",
+      "className": "shoppers",
       "mustache": {
         "isNode": true,
         "isSecure": true,
@@ -287,7 +287,7 @@
     },
     {
       "swagger": "swagger/v1/subscriptions.json",
-      "className": "Subscriptions",
+      "className": "subscriptions",
       "mustache": {
         "isNode": true,
         "isSecure": true,

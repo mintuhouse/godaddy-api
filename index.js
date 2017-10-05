@@ -8,48 +8,48 @@ var GoDaddy = function(api_key, api_secret) {
     }
   }
 
-  var AbuseTickets = require('./lib/AbuseTickets').AbuseTickets;
-  var AftermarketListings = require('./lib/AftermarketListings').AftermarketListings;
-  var Agreements = require('./lib/Agreements').Agreements;
-  var Cart = require('./lib/Cart').Cart;
-  var Certificates = require('./lib/Certificates').Certificates;
-  var CloudAddresses = require('./lib/CloudAddresses').CloudAddresses;
-  var CloudApplications = require('./lib/CloudApplications').CloudApplications;
-  var CloudDataCenters = require('./lib/CloudDataCenters').CloudDataCenters;
-  var CloudEmailPreferences = require('./lib/CloudEmailPreferences').CloudEmailPreferences;
-  var CloudImages = require('./lib/CloudImages').CloudImages;
-  var CloudLimits = require('./lib/CloudLimits').CloudLimits;
-  var CloudServers = require('./lib/CloudServers').CloudServers;
-  var CloudSpecs = require('./lib/CloudSpecs').CloudSpecs;
-  var CloudSshKeys = require('./lib/CloudSshKeys').CloudSshKeys;
-  var CloudUsage = require('./lib/CloudUsage').CloudUsage;
-  var Countries = require('./lib/Countries').Countries;
-  var Domains = require('./lib/Domains').Domains;
-  var Orders = require('./lib/Orders').Orders;
-  var Shoppers = require('./lib/Shoppers').Shoppers;
-  var Subscriptions = require('./lib/Subscriptions').Subscriptions;
+  var abuseTickets = require('./lib/abuseTickets').abuseTickets;
+  var aftermarketListings = require('./lib/aftermarketListings').aftermarketListings;
+  var agreements = require('./lib/agreements').agreements;
+  var cart = require('./lib/cart').cart;
+  var certificates = require('./lib/certificates').certificates;
+  var cloudAddresses = require('./lib/cloudAddresses').cloudAddresses;
+  var cloudApplications = require('./lib/cloudApplications').cloudApplications;
+  var cloudDataCenters = require('./lib/cloudDataCenters').cloudDataCenters;
+  var cloudEmailPreferences = require('./lib/cloudEmailPreferences').cloudEmailPreferences;
+  var cloudImages = require('./lib/cloudImages').cloudImages;
+  var cloudLimits = require('./lib/cloudLimits').cloudLimits;
+  var cloudServers = require('./lib/cloudServers').cloudServers;
+  var cloudSpecs = require('./lib/cloudSpecs').cloudSpecs;
+  var cloudSshKeys = require('./lib/cloudSshKeys').cloudSshKeys;
+  var cloudUsage = require('./lib/cloudUsage').cloudUsage;
+  var countries = require('./lib/countries').countries;
+  var domains = require('./lib/domains').domains;
+  var orders = require('./lib/orders').orders;
+  var shoppers = require('./lib/shoppers').shoppers;
+  var subscriptions = require('./lib/subscriptions').subscriptions;
 
   return  {
-    AbuseTickets: new AbuseTickets(domainOrOptions),
-    AftermarketListings: new AftermarketListings(domainOrOptions),
-    Agreements: new Agreements(domainOrOptions),
-    Cart: new Cart(domainOrOptions),
-    Certificates: new Certificates(domainOrOptions),
-    CloudAddresses: new CloudAddresses(domainOrOptions),
-    CloudApplications: new CloudApplications(domainOrOptions),
-    CloudDataCenters: new CloudDataCenters(domainOrOptions),
-    CloudEmailPreferences: new CloudEmailPreferences(domainOrOptions),
-    CloudImages: new CloudImages(domainOrOptions),
-    CloudLimits: new CloudLimits(domainOrOptions),
-    CloudServers: new CloudServers(domainOrOptions),
-    CloudSpecs: new CloudSpecs(domainOrOptions),
-    CloudSshKeys: new CloudSshKeys(domainOrOptions),
-    CloudUsage: new CloudUsage(domainOrOptions),
-    Countries: new Countries(domainOrOptions),
-    Domains: new Domains(domainOrOptions),
-    Orders: new Orders(domainOrOptions),
-    Shoppers: new Shoppers(domainOrOptions),
-    Subscriptions: new Subscriptions(domainOrOptions),
+    abuseTickets: new abuseTickets(domainOrOptions),
+    aftermarketListings: new aftermarketListings(domainOrOptions),
+    agreements: new agreements(domainOrOptions),
+    cart: new cart(domainOrOptions),
+    certificates: new certificates(domainOrOptions),
+    cloudAddresses: new cloudAddresses(domainOrOptions),
+    cloudApplications: new cloudApplications(domainOrOptions),
+    cloudDataCenters: new cloudDataCenters(domainOrOptions),
+    cloudEmailPreferences: new cloudEmailPreferences(domainOrOptions),
+    cloudImages: new cloudImages(domainOrOptions),
+    cloudLimits: new cloudLimits(domainOrOptions),
+    cloudServers: new cloudServers(domainOrOptions),
+    cloudSpecs: new cloudSpecs(domainOrOptions),
+    cloudSshKeys: new cloudSshKeys(domainOrOptions),
+    cloudUsage: new cloudUsage(domainOrOptions),
+    countries: new countries(domainOrOptions),
+    domains: new domains(domainOrOptions),
+    orders: new orders(domainOrOptions),
+    shoppers: new shoppers(domainOrOptions),
+    subscriptions: new subscriptions(domainOrOptions),
   }
 }
 

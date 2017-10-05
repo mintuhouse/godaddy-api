@@ -16,6 +16,7 @@
   "author": "Hasan Kumar",
   "license": "MIT",
   "devDependencies": {
+    "camelcase": "^4.1.0",
     "grunt": "^1.0.1",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-jsonlint": "^1.1.0",
@@ -23,8 +24,7 @@
     "grunt-swagger-js-codegen": "^0.4.6",
     "mustache": "^2.3.0",
     "supertest": "^3.0.0",
-    "swagger-js-codegen": "^1.10.1",
-    "uppercamelcase": "^3.0.0"
+    "swagger-js-codegen": "^1.10.1"
   },
   "dependencies": {},
   "repository": {
