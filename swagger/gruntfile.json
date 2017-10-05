@@ -1,82 +1,304 @@
-[
-  {
-    "swagger": "swagger/v1/abuse/tickets.json",
-    "className": "AbuseTickets"
-  },
-  {
-    "swagger": "swagger/v1/aftermarket/listings.json",
-    "className": "AftermarketListings"
-  },
-  {
-    "swagger": "swagger/v1/agreements.json",
-    "className": "Agreements"
-  },
-  {
-    "swagger": "swagger/v1/cart.json",
-    "className": "Cart"
-  },
-  {
-    "swagger": "swagger/v1/certificates.json",
-    "className": "Certificates"
-  },
-  {
-    "swagger": "swagger/v1/cloud/addresses.json",
-    "className": "CloudAddresses"
-  },
-  {
-    "swagger": "swagger/v1/cloud/applications.json",
-    "className": "CloudApplications"
-  },
-  {
-    "swagger": "swagger/v1/cloud/dataCenters.json",
-    "className": "CloudDataCenters"
-  },
-  {
-    "swagger": "swagger/v1/cloud/emailPreferences.json",
-    "className": "CloudEmailPreferences"
-  },
-  {
-    "swagger": "swagger/v1/cloud/images.json",
-    "className": "CloudImages"
-  },
-  {
-    "swagger": "swagger/v1/cloud/limits.json",
-    "className": "CloudLimits"
-  },
-  {
-    "swagger": "swagger/v1/cloud/servers.json",
-    "className": "CloudServers"
-  },
-  {
-    "swagger": "swagger/v1/cloud/specs.json",
-    "className": "CloudSpecs"
-  },
-  {
-    "swagger": "swagger/v1/cloud/sshKeys.json",
-    "className": "CloudSshKeys"
-  },
-  {
-    "swagger": "swagger/v1/cloud/usage.json",
-    "className": "CloudUsage"
-  },
-  {
-    "swagger": "swagger/v1/countries.json",
-    "className": "Countries"
-  },
-  {
-    "swagger": "swagger/v1/domains.json",
-    "className": "Domains"
-  },
-  {
-    "swagger": "swagger/v1/orders.json",
-    "className": "Orders"
-  },
-  {
-    "swagger": "swagger/v1/shoppers.json",
-    "className": "Shoppers"
-  },
-  {
-    "swagger": "swagger/v1/subscriptions.json",
-    "className": "Subscriptions"
-  }
-]
+{
+  "apis": [
+    {
+      "swagger": "swagger/v1/abuse/tickets.json",
+      "className": "AbuseTickets",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/aftermarket/listings.json",
+      "className": "AftermarketListings",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/agreements.json",
+      "className": "Agreements",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cart.json",
+      "className": "Cart",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/certificates.json",
+      "className": "Certificates",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/addresses.json",
+      "className": "CloudAddresses",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/applications.json",
+      "className": "CloudApplications",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/dataCenters.json",
+      "className": "CloudDataCenters",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/emailPreferences.json",
+      "className": "CloudEmailPreferences",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/images.json",
+      "className": "CloudImages",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/limits.json",
+      "className": "CloudLimits",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/servers.json",
+      "className": "CloudServers",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/specs.json",
+      "className": "CloudSpecs",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/sshKeys.json",
+      "className": "CloudSshKeys",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/cloud/usage.json",
+      "className": "CloudUsage",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/countries.json",
+      "className": "Countries",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/domains.json",
+      "className": "Domains",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/orders.json",
+      "className": "Orders",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/shoppers.json",
+      "className": "Shoppers",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    },
+    {
+      "swagger": "swagger/v1/subscriptions.json",
+      "className": "Subscriptions",
+      "mustache": {
+        "isNode": true,
+        "isSecure": true,
+        "isSecureApiKey": true
+      },
+      "template": {
+        "class": "templates/swagger-js-codegen/node-class.mustache",
+        "method": "templates/swagger-js-codegen/method.mustache",
+        "request": "templates/swagger-js-codegen/node-request.mustache"
+      },
+      "custom": true
+    }
+  ]
+}

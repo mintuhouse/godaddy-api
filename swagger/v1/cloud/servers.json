@@ -3,13 +3,21 @@
     "application/json"
   ],
   "apiVersion": "1.0",
-  "authorizations": {},
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "resourcePath": "/v1/cloud/servers",
   "apis": [
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -29,13 +37,6 @@
           ],
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -49,7 +50,9 @@
           "method": "GET"
         },
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -68,13 +71,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -273,16 +269,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "Server",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "ServerCreate",
@@ -297,7 +288,9 @@
           "method": "POST"
         },
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -311,13 +304,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": false,
               "name": "status",
@@ -392,16 +378,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "ServerAction",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -453,16 +434,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "ServerAction",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -509,16 +485,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "ServerAction",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -555,16 +526,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "Console",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -584,7 +550,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -603,13 +571,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -636,7 +597,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -650,13 +613,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -728,7 +684,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -747,13 +705,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -780,7 +731,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -794,13 +747,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -848,7 +794,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -867,13 +815,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -900,7 +841,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -914,13 +857,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",

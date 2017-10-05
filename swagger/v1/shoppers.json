@@ -14,13 +14,6 @@
           "summary": "Update details for the specified Shopper",
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "shopperId",
               "required": true,
               "paramType": "path",
@@ -88,7 +81,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "GET",
@@ -96,13 +92,6 @@
           "type": "Shopper",
           "summary": "Get details for the specified Shopper",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "shopperId",
               "required": true,
@@ -159,7 +148,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -172,13 +164,6 @@
           "type": "ShopperId",
           "summary": "Create a Subaccount owned by the authenticated Reseller",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "subaccount",
               "required": true,
@@ -235,7 +220,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -453,6 +441,13 @@
         "nameFirst",
         "nameLast"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

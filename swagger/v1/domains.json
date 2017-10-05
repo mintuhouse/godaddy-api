@@ -14,13 +14,6 @@
           "summary": "Update details for the specified Domain",
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "domain",
               "required": true,
               "paramType": "path",
@@ -120,7 +113,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "DELETE",
@@ -128,13 +124,6 @@
           "type": "void",
           "summary": "Cancel a purchased domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "domain",
               "required": true,
@@ -215,7 +204,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "GET",
@@ -223,13 +215,6 @@
           "type": "DomainDetail",
           "summary": "Retrieve details for the specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -303,7 +288,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -316,13 +304,6 @@
           "type": "DomainAvailableResponse",
           "summary": "Determine whether or not the specified domain is available for purchase",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "domain",
               "required": true,
@@ -462,7 +443,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "POST",
@@ -470,13 +454,6 @@
           "type": "DomainAvailableBulk",
           "summary": "Determine whether or not the specified domains are available for purchase",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "domains",
               "required": true,
@@ -617,7 +594,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -633,13 +613,6 @@
           },
           "summary": "Retrieve a list of Domains for the specified Shopper",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -990,7 +963,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1003,13 +979,6 @@
           "type": "void",
           "summary": "Submit a privacy cancellation request for the given domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1092,7 +1061,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1105,13 +1077,6 @@
           "type": "void",
           "summary": "Re-send Contact E-mail Verification for specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1184,7 +1149,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1199,15 +1167,7 @@
             "type": "TldSummary"
           },
           "summary": "Retrieves a list of TLDs supported and enabled for sale",
-          "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            }
-          ],
+          "parameters": [],
           "responseMessages": [
             {
               "code": 200,
@@ -1251,7 +1211,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1264,13 +1227,6 @@
           "type": "DomainPurchaseResponse",
           "summary": "Purchase and register the specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1410,7 +1366,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1423,13 +1382,6 @@
           "type": "DomainPurchaseResponse",
           "summary": "Renew the specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1519,7 +1471,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1533,13 +1488,6 @@
           "summary": "Retrieve the schema to be submitted when registering a Domain for the specified TLD",
           "notes": "",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "tld",
               "required": true,
@@ -1601,7 +1549,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1615,13 +1566,6 @@
           "summary": "Validate the request body using the Domain Purchase Schema for the specified TLD",
           "notes": "",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "body",
               "required": true,
@@ -1682,7 +1626,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1695,13 +1642,6 @@
           "type": "DomainPurchaseResponse",
           "summary": "Purchase and start or restart transfer process",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1868,7 +1808,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1881,13 +1824,6 @@
           "type": "DomainPurchaseResponse",
           "summary": "Purchase privacy for a specified domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -1977,7 +1913,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1990,13 +1929,6 @@
           "type": "IdentityDocumentId",
           "summary": "Create an Identity Document from uploaded image",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2082,7 +2014,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "GET",
@@ -2093,13 +2028,6 @@
           },
           "summary": "Get a collection of identity documents the current shopper owns",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2154,7 +2082,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2176,13 +2107,6 @@
             "worry about parsing TLDs out of domain names"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2265,7 +2189,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "GET",
@@ -2276,13 +2203,6 @@
           },
           "summary": "Retrieve a list of Verifications for the specified Identity Document",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2364,7 +2284,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2377,13 +2300,6 @@
           "type": "void",
           "summary": "Update domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2475,7 +2391,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2491,13 +2410,6 @@
           },
           "summary": "Retrieve the legal agreement(s) required to purchase the specified TLD and add-ons",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Market-Id",
               "required": false,
@@ -2580,7 +2492,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2594,13 +2509,6 @@
           "summary": "Validate the request body using the Domain Contact Validation Schema for specified domains.",
           "notes": "All contacts specified in request will be validated against all domains specifed in \"domains\". As an alternative, you can also pass in tlds, with the exception of `uk`, which requires full domain names",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Private-Label-Id",
               "required": false,
@@ -2665,7 +2573,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2681,13 +2592,6 @@
           },
           "summary": "Retrieve DNS Records for the specified Domain, optionally with the specified Type and/or Name",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2799,7 +2703,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -2812,13 +2719,6 @@
           "type": "void",
           "summary": "Replace all DNS Records for the specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -2906,7 +2806,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "PATCH",
@@ -2914,13 +2817,6 @@
           "type": "void",
           "summary": "Add the specified DNS Records to the specified Domain",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -3000,7 +2896,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -3013,13 +2912,6 @@
           "type": "void",
           "summary": "Replace all DNS Records for the specified Domain with the specified Type",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -3124,7 +3016,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -3137,13 +3032,6 @@
           "type": "void",
           "summary": "Replace all DNS Records for the specified Domain with the specified Type and Name",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -3255,7 +3143,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -3271,13 +3162,6 @@
           },
           "summary": "Suggest alternate Domain names based on a seed Domain, a set of keywords, or the shopper's purchase history",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -3676,7 +3560,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -5937,6 +5824,13 @@
         "status",
         "tld"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

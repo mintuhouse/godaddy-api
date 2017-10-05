@@ -17,13 +17,6 @@
           "summary": "Retrieve Legal Agreements for provided agreements keys",
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "X-Private-Label-Id",
               "required": false,
               "paramType": "header",
@@ -93,7 +86,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -231,6 +227,13 @@
         "retryAfterSec",
         "code"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

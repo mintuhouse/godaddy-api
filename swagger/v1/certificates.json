@@ -19,13 +19,6 @@
           ],
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "X-Market-Id",
               "required": false,
               "paramType": "header",
@@ -82,7 +75,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -100,13 +96,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Market-Id",
               "required": false,
@@ -163,7 +152,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -182,13 +174,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -227,7 +212,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -246,13 +234,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -303,7 +284,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -321,13 +305,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -372,7 +349,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -400,13 +380,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -476,7 +449,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -495,13 +471,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -541,7 +510,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -560,13 +532,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -615,7 +580,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -643,13 +611,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -710,7 +671,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -736,13 +700,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -798,7 +755,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -817,13 +777,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -879,7 +832,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "GET",
@@ -893,13 +849,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -939,7 +888,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "DELETE",
@@ -953,13 +905,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -998,7 +943,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -1017,13 +965,6 @@
             "application/json"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "certificateId",
               "required": true,
@@ -1063,7 +1004,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -2002,6 +1946,13 @@
       "required": [
         "code"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

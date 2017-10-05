@@ -3,13 +3,21 @@
     "application/json"
   ],
   "apiVersion": "1.0",
-  "authorizations": {},
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "resourcePath": "/v1/cloud/images",
   "apis": [
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request completed successfully",
@@ -28,13 +36,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -86,16 +87,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "ImageAction",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -115,7 +111,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -134,13 +132,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": false,
               "type": "string",
@@ -227,7 +218,9 @@
           "method": "GET"
         },
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Image creation started",
@@ -302,13 +295,6 @@
           ],
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "required": true,
               "type": "ImageCreate",
               "name": "body",
@@ -327,7 +313,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -346,13 +334,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -379,7 +360,9 @@
     {
       "operations": [
         {
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "responseMessages": [
             {
               "message": "Request was successful",
@@ -393,13 +376,6 @@
             }
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",
@@ -470,16 +446,11 @@
               "responseModel": "Error"
             }
           ],
-          "authorizations": {},
+          "authorizations": {
+            "sso_key": []
+          },
           "type": "void",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "required": true,
               "type": "string",

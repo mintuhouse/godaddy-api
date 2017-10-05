@@ -14,13 +14,6 @@
           "summary": "Retrieve details for the specified Subscription",
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -102,7 +95,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "PATCH",
@@ -115,13 +111,6 @@
             "<strong>This endpoint only supports JWT authentication</strong>"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "subscriptionId",
               "required": true,
@@ -181,7 +170,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "DELETE",
@@ -189,13 +181,6 @@
           "type": "void",
           "summary": "Cancel the specified Subscription",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -321,7 +306,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -334,13 +322,6 @@
           "type": "SubscriptionList",
           "summary": "Retrieve a list of Subscriptions for the specified Shopper",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -460,7 +441,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -476,13 +460,6 @@
           },
           "summary": "Retrieve a list of ProductGroups for the specified Shopper",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -542,7 +519,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -966,6 +946,13 @@
         "productGroupKey",
         "subscriptionCount"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

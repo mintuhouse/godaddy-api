@@ -15,13 +15,6 @@
           "notes": "<strong>API Resellers</strong><ol><li>This endpoint does not support subaccounts and therefore API Resellers should not supply an X-Shopper-Id header</li></ol>",
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "periodStart",
               "required": false,
               "paramType": "query",
@@ -165,7 +158,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -179,13 +175,6 @@
           "summary": "Retrieve details for specified order",
           "notes": "<strong>API Resellers</strong><ol><li>This endpoint does not support subaccounts and therefore API Resellers should not supply an X-Shopper-Id header</li></ol>",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "orderId",
               "required": true,
@@ -262,7 +251,10 @@
             "application/xml",
             "text/javascript",
             "text/xml"
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -1199,6 +1191,13 @@
         "retryAfterSec",
         "code"
       ]
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }

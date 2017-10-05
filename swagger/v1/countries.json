@@ -8,7 +8,13 @@
   "produces": [
     "application/json"
   ],
-  "authorizations": {},
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "apis": [
     {
       "path": "/v1/countries",
@@ -20,13 +26,6 @@
           "summary": "Retrieves summary country information for the provided marketId and filters",
           "notes": "Authorization is not required",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "marketId",
               "required": true,
@@ -114,7 +113,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -128,13 +130,6 @@
           "summary": "Retrieves country and summary state information for provided countryKey",
           "notes": "Authorization is not required",
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "countryKey",
               "required": true,
@@ -204,7 +199,10 @@
               "message": "Internal server error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }

@@ -14,13 +14,6 @@
           ],
           "parameters": [
             {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
-            {
               "name": "type",
               "required": false,
               "paramType": "query",
@@ -120,7 +113,10 @@
               "message": "Error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         },
         {
           "method": "POST",
@@ -129,13 +125,6 @@
             "Create a new abuse ticket"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "body",
               "required": true,
@@ -165,7 +154,10 @@
               "message": "Error",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     },
@@ -179,13 +171,6 @@
             "Return the abuse ticket data for a given ticket id"
           ],
           "parameters": [
-            {
-              "name": "Authorization",
-              "required": true,
-              "paramType": "header",
-              "type": "string",
-              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-            },
             {
               "name": "ticketId",
               "required": true,
@@ -216,7 +201,10 @@
               "message": "Invalid ticket id provided",
               "responseModel": "Error"
             }
-          ]
+          ],
+          "authorizations": {
+            "sso_key": []
+          }
         }
       ]
     }
@@ -480,6 +468,13 @@
         }
       },
       "required": []
+    }
+  },
+  "authorizations": {
+    "sso_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }
