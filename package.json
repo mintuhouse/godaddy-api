@@ -2,9 +2,10 @@
   "name": "godaddy-api",
   "version": "1.0.0",
   "description": "GoDaddy API generated from https://developer.godaddy.com/doc",
-  "main": "index.js",
+  "main": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "",
+    "prepublish": "grunt"
   },
   "keywords": [
     "Godaddy",
@@ -13,8 +14,14 @@
   "author": "Hasan Kumar",
   "license": "MIT",
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-jsonlint": "^1.1.0",
+    "grunt-run": "^0.8.0",
+    "grunt-swagger-js-codegen": "^0.4.6",
     "supertest": "^3.0.0",
-    "swagger-js-codegen": "^1.10.1"
+    "swagger-js-codegen": "^1.10.1",
+    "uppercamelcase": "^3.0.0"
   },
   "dependencies": {},
   "repository": {
@@ -23,6 +30,9 @@
   },
   "bugs": {
     "url": "https://github.com/mintuhouse/godaddy-api/issues"
+  },
+  "directories": {
+    "test": "./test"
   },
   "homepage": "https://github.com/mintuhouse/godaddy-api#readme"
 }
