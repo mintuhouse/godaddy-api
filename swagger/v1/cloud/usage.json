@@ -1,0 +1,222 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/usage",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "AccountUsage"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "format": "iso-currency-code",
+              "name": "currency",
+              "paramType": "query",
+              "description": "Currency in which pricing information should be returned. If specified, overrides any shopper currency settings.",
+              "type": "string",
+              "pattern": "^[A-Z][A-Z][A-Z]$",
+              "defaultValue": "USD"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "market",
+              "paramType": "query",
+              "description": "Locale in which pricing information should be formatted. If specified, overrides any shopper market settings."
+            }
+          ],
+          "type": "AccountUsage",
+          "summary": "Retrieve server usage data for a specified date range.",
+          "nickname": "getUsage",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/usage"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "ServerUsageDetail": {
+      "required": [],
+      "id": "ServerUsageDetail",
+      "properties": {
+        "xlarge": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        },
+        "small": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        },
+        "large": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        },
+        "tiny": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        },
+        "medium": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        }
+      }
+    },
+    "UsageSummary": {
+      "required": [
+        "addressCount",
+        "serverCount",
+        "billingDate",
+        "totalEstimatedCharge"
+      ],
+      "id": "UsageSummary",
+      "properties": {
+        "addressCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalEstimatedCharge": {
+          "type": "string"
+        },
+        "serverCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "billingDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "AddressUsageDetail": {
+      "required": [],
+      "id": "AddressUsageDetail",
+      "properties": {
+        "dynamicIpv4": {
+          "type": "array",
+          "items": {
+            "$ref": "UsageDetailItem"
+          }
+        }
+      }
+    },
+    "AccountUsage": {
+      "required": [
+        "summary",
+        "servers",
+        "addresses"
+      ],
+      "id": "AccountUsage",
+      "properties": {
+        "servers": {
+          "$ref": "ServerUsageDetail"
+        },
+        "summary": {
+          "$ref": "UsageSummary"
+        },
+        "discounts": {
+          "$ref": "DiscountDetail"
+        },
+        "addresses": {
+          "$ref": "AddressUsageDetail"
+        }
+      }
+    },
+    "DiscountDetail": {
+      "required": [],
+      "id": "DiscountDetail",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "DiscountDetailItem"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "DiscountDetailItem"
+          }
+        }
+      }
+    },
+    "DiscountDetailItem": {
+      "required": [
+        "itemId",
+        "description",
+        "hours",
+        "estimatedDiscount"
+      ],
+      "id": "DiscountDetailItem",
+      "properties": {
+        "estimatedDiscount": {
+          "type": "string"
+        },
+        "hours": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageDetailItem": {
+      "required": [
+        "itemId",
+        "description",
+        "hours",
+        "estimatedCharge"
+      ],
+      "id": "UsageDetailItem",
+      "properties": {
+        "hours": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "estimatedCharge": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/emailPreferences",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "EmailPreference"
+            }
+          ],
+          "parameters": [],
+          "type": "EmailPreference",
+          "summary": "Get the email preferences for the user.",
+          "nickname": "getEmailPreferences",
+          "method": "GET"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request completed successfully",
+              "code": 200,
+              "responseModel": "EmailPreference"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "EmailPreference",
+              "name": "body",
+              "paramType": "body",
+              "description": "Email preferences"
+            }
+          ],
+          "type": "EmailPreference",
+          "summary": "Update the user's email preferences",
+          "nickname": "patchEmailPreference",
+          "method": "PATCH"
+        }
+      ],
+      "path": "/v1/cloud/emailPreferences"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "EmailPreference": {
+      "required": [],
+      "id": "EmailPreference",
+      "properties": {
+        "backupCreated": {
+          "type": "boolean",
+          "description": "Setting for backup create email preference. Set this to true or false, to receive backup create event email notification for the user.",
+          "defaultValue": true
+        },
+        "serverCreated": {
+          "type": "boolean",
+          "description": "Setting for server create email preference. Set this to true or false, to receive server create event email notification for the user.",
+          "defaultValue": true
+        },
+        "snapshotCreated": {
+          "type": "boolean",
+          "description": "Setting for snapshot create email preference. Set this to true or false, to receive snapshot create event email notification for the user.",
+          "defaultValue": true
+        },
+        "addressChanged": {
+          "type": "boolean",
+          "description": "Setting for address change email preference. Set this to true or false, to receive address change event email notification for the user.",
+          "defaultValue": true
+        },
+        "serverStopped": {
+          "type": "boolean",
+          "description": "Setting for server power off email preference. Set this to true or false, to receive server power off event email notification for the user.",
+          "defaultValue": true
+        },
+        "snapshotDestroyed": {
+          "type": "boolean",
+          "description": "Setting for snapshot destroy email preference. Set this to true or false, to receive snapshot destroy event email notification for the user.",
+          "defaultValue": true
+        },
+        "serverStarted": {
+          "type": "boolean",
+          "description": "Setting for server power on email preference. Set this to true or false, to receive server power on event email notification for the user.",
+          "defaultValue": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Global level email preference setting. Set this to true or false to turn email preferences on or off at a global level for the user.",
+          "defaultValue": false
+        },
+        "serverDestroyed": {
+          "type": "boolean",
+          "description": "Setting for server destroy email preference. Set this to true or false, to receive server destroy event email notification for the user.",
+          "defaultValue": true
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

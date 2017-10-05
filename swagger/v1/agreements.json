@@ -1,0 +1,229 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://api.godaddy.com",
+  "resourcePath": "/v1/agreements",
+  "apis": [
+    {
+      "path": "/v1/agreements",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "get",
+          "type": "array",
+          "items": {
+            "type": "LegalAgreement"
+          },
+          "summary": "Retrieve Legal Agreements for provided agreements keys",
+          "parameters": [
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "bcp-47",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market used to retrieve/translate Legal Agreements"
+            },
+            {
+              "name": "keys",
+              "required": true,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Keys for Agreements whose details are to be retrieved"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "[LegalAgreement]"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/xml",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml",
+    "text/xml",
+    "application/javascript",
+    "text/javascript"
+  ],
+  "models": {
+    "LegalAgreement": {
+      "id": "LegalAgreement",
+      "additionalProperties": false,
+      "properties": {
+        "agreementKey": {
+          "type": "string",
+          "description": "Unique identifier for the legal agreement"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the legal agreement"
+        },
+        "url": {
+          "type": "string",
+          "format": "url",
+          "description": "URL to a page containing the legal agreement"
+        },
+        "content": {
+          "type": "string",
+          "description": "Contents of the legal agreement, suitable for embedding"
+        }
+      },
+      "required": [
+        "agreementKey",
+        "title",
+        "content"
+      ]
+    },
+    "Error": {
+      "id": "Error",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "<ul>\n<li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>\n<strong style='margin-left: 12px;'>OR</strong>\n<li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>\n</ul>"
+        },
+        "pathRelated": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to a field containing an error, which is referenced by `path`"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "ErrorLimit": {
+      "id": "ErrorLimit",
+      "additionalProperties": false,
+      "properties": {
+        "retryAfterSec": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "Number of seconds to wait before attempting a similar request"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "retryAfterSec",
+        "code"
+      ]
+    }
+  }
+}

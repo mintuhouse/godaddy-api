@@ -1,0 +1,187 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/specs",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "Spec"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Spec not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "specId",
+              "paramType": "path",
+              "description": "Id of spec to be fetched"
+            }
+          ],
+          "type": "Spec",
+          "summary": "Find spec by spec specId",
+          "nickname": "getSpecById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/specs/{specId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "SpecList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "name",
+              "paramType": "query",
+              "description": "Spec name filter (exact match)"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Spec status filter (exact match)",
+              "type": "string",
+              "enum": [
+                "ARCHIVED",
+                "LIVE"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "SpecList",
+          "summary": "Get a list of specs",
+          "nickname": "getSpecList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/specs"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "Spec": {
+      "required": [
+        "specId",
+        "name",
+        "ramMb",
+        "cpuCores",
+        "diskGb",
+        "status",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "Spec",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ARCHIVED",
+            "LIVE"
+          ],
+          "description": "Status of this Spec"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this Spec"
+        },
+        "diskGb": {
+          "type": "integer",
+          "description": "Disk allocated in GB",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "specId": {
+          "type": "string",
+          "description": "Id of this Spec"
+        },
+        "ramMb": {
+          "type": "integer",
+          "description": "RAM allocated in MB",
+          "format": "int64"
+        },
+        "cpuCores": {
+          "type": "integer",
+          "description": "CPU Cores allocated",
+          "format": "int64"
+        }
+      }
+    },
+    "SpecList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "SpecList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "Spec"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

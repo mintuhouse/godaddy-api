@@ -1,0 +1,705 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/images",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request completed successfully",
+              "code": 200,
+              "responseModel": "Image"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Image not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "path",
+              "description": "Id of image to be fetched"
+            }
+          ],
+          "type": "Image",
+          "summary": "Find image by image imageId",
+          "nickname": "getImageById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/images/{imageId}"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Image deletion started",
+              "code": 202,
+              "responseModel": "ImageAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Image not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Image not ready to perform this action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Destroy operation not allowed on backups.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Unable to destroy snapshot while publish is in progress.  Try again once the publish is complete.",
+              "code": 409,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "ImageAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "path",
+              "description": "Id of Image to be destroyed"
+            }
+          ],
+          "notes": "Permanently destroys the image, making it unavailable for new servers.",
+          "summary": "Destroy an image",
+          "nickname": "destroyImage",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/images/{imageId}/destroy"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ImageList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Authenticated user is not allowed access",
+              "code": 403,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "dataCenterId",
+              "paramType": "query",
+              "description": "Data center the image is in (id)"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "name",
+              "paramType": "query",
+              "description": "Image name filter (exact match)"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "version",
+              "paramType": "query",
+              "description": "Image version filter (exact match)"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Image status filter (exact match)",
+              "type": "string",
+              "enum": [
+                "ARCHIVED",
+                "BUILDING",
+                "DEPRECATED",
+                "DESTROYED",
+                "DESTROYING",
+                "LIVE",
+                "SAVING"
+              ]
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Image type (exact match)",
+              "type": "string",
+              "enum": [
+                "APPLICATION",
+                "BACKUP",
+                "BASE",
+                "PUBLISHED",
+                "SNAPSHOT"
+              ]
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "sourceServerId",
+              "paramType": "query",
+              "description": "Source server filter (exact match)"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "sizeMb",
+              "paramType": "query",
+              "description": "Size of image in MB (exact match)"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "ImageList",
+          "summary": "Get a list of images. By default, only LIVE images are returned",
+          "nickname": "getImageList",
+          "method": "GET"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Image creation started",
+              "code": 202,
+              "responseModel": "Image"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "name is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "sourceServerId or sourceImageId is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "sourceServer does not exist",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "sourceImage does not exist",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server must be stopped (status=\"STOPPED\") to do this.  POST to /servers/{serverId}/stop to stop it.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is already having a snapshot taken.  Try again when snapshot is complete (server task_state=\"\").",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "snapshot limit reached",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is in error state and cannot be started or stopped in this state.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "sourceServerId or sourceImageId is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "The maximum number of clones has been reached (3/3).  Try again once one of them completes.",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "This snapshot is already being cloned to the given datacenter.",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "dataCenterId is required",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "ImageCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "image details"
+            }
+          ],
+          "type": "Image",
+          "summary": "Create a new image",
+          "nickname": "addImage",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/images"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ImageAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "ImageAction not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "path",
+              "description": "Id of parent Image"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageActionId",
+              "paramType": "path",
+              "description": "Id of ImageAction to be fetched"
+            }
+          ],
+          "type": "ImageAction",
+          "summary": "Get ImageAction by id",
+          "nickname": "getImageActionById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/images/{imageId}/actions/{imageActionId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ImageActionList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "path",
+              "description": "Retrieve all actions for a given image"
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Action type filter (exact match)",
+              "type": "string",
+              "enum": [
+                "CREATE",
+                "DELETE"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "ImageActionList",
+          "summary": "List of actions performed on images",
+          "nickname": "getImageActionList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/images/{imageId}/actions"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Publish request accepted",
+              "code": 202
+            },
+            {
+              "message": "Not authorized to perform this operation.",
+              "code": 403,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Image type not supported.Only a snapshot or a previously published image can be published.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Publications already exist for the provided snapshot.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "application does not exist",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "void",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "path",
+              "description": "Image to publish (id)"
+            },
+            {
+              "required": false,
+              "type": "PublicationCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "Publication details"
+            }
+          ],
+          "notes": "Publishing an image makes it available to all users in all data centers.  This feature is not generally available at this time.",
+          "summary": "Publish this image",
+          "nickname": "publishImage",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/images/{imageId}/publish"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "ImageActionList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "ImageActionList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "ImageAction"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "ImageCreate": {
+      "required": [
+        "name"
+      ],
+      "id": "ImageCreate",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Image version. For display only. Not required."
+        },
+        "sourceServerId": {
+          "type": "string",
+          "description": "Server to snapshot. Source server or source image is required"
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Data center where image is to be created"
+        },
+        "sourceImageId": {
+          "type": "string",
+          "description": "Image to clone. Source server or source image is required"
+        }
+      }
+    },
+    "ImageList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "ImageList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "Image"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "PublicationCreate": {
+      "required": [],
+      "id": "PublicationCreate",
+      "properties": {
+        "dataCenterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ids of the data centers where image will be published. Default is to publish to all data centers."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application this image contains (id)"
+        }
+      }
+    },
+    "Image": {
+      "required": [
+        "imageId",
+        "name",
+        "version",
+        "dataCenterId",
+        "status",
+        "type",
+        "sizeMb",
+        "sourceServerId",
+        "sourceImageId",
+        "rootImageId",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "Image",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "Id of this Image"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this Image"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Data center the image is in"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "APPLICATION",
+            "BACKUP",
+            "BASE",
+            "PUBLISHED",
+            "SNAPSHOT"
+          ],
+          "description": "Type of this Image"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ARCHIVED",
+            "BUILDING",
+            "DEPRECATED",
+            "DESTROYED",
+            "DESTROYING",
+            "LIVE",
+            "SAVING"
+          ],
+          "description": "Status of this Image"
+        },
+        "sourceImageId": {
+          "type": "string",
+          "description": "Image this image was cloned from"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "sourceServerId": {
+          "type": "string",
+          "description": "Server the image was created from"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this Image"
+        },
+        "rootImageId": {
+          "type": "string",
+          "description": "Image this image is derived from"
+        },
+        "sizeMb": {
+          "type": "integer",
+          "description": "Size of the image in MB",
+          "format": "int64"
+        }
+      }
+    },
+    "ImageAction": {
+      "required": [
+        "imageActionId",
+        "imageId",
+        "type",
+        "completedAt",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "ImageAction",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "Foreign key to Image resource"
+        },
+        "imageActionId": {
+          "type": "string",
+          "description": "Id of this ImageAction resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the action was originally initiated",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "CREATE",
+            "DELETE"
+          ],
+          "description": "Type of action"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "DateTime the action was completed by the system",
+          "format": "date-time"
+        }
+      }
+    },
+    "Pagination": {
+      "required": [
+        "next",
+        "prev",
+        "limit",
+        "total"
+      ],
+      "id": "Pagination",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Number of results requested",
+          "format": "int32"
+        },
+        "prev": {
+          "type": "string",
+          "description": "Link to previous page of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "Link to next page of results"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Number of results available",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

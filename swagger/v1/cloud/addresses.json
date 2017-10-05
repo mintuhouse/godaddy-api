@@ -1,0 +1,696 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/addresses",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "AddressList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Authenticated user is not allowed access",
+              "code": 403,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "address",
+              "paramType": "query",
+              "description": "Numeric address (exact match)"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "query",
+              "description": "serverId filter"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Address status (exact match)",
+              "type": "string",
+              "enum": [
+                "ATTACHED",
+                "ATTACHING",
+                "DESTROYED",
+                "DESTROYING",
+                "DETACHED",
+                "DETACHING",
+                "NEW",
+                "READY",
+                "RESERVED"
+              ]
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Address type (exact match)",
+              "type": "string",
+              "enum": [
+                "DYNAMIC",
+                "PRIVATE",
+                "PUBLIC"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "AddressList",
+          "summary": "List addresses",
+          "nickname": "getAddressList",
+          "method": "GET"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Address creation started",
+              "code": 202,
+              "responseModel": "IpAddress"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "You have reached or exceeded your address limit",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Datacenter does not exist.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone does not exist in selected datacenter.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone is not available; choose a LIVE one or try again later",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone not found; choose an availiable zone",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "IpAddressCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "address details"
+            }
+          ],
+          "type": "IpAddress",
+          "summary": "Create a new dynamic IPv4 address",
+          "nickname": "addAddress",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/addresses"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request completed successfully",
+              "code": 200,
+              "responseModel": "IpAddress"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Id of address to be fetched"
+            }
+          ],
+          "type": "IpAddress",
+          "summary": "Find address by id",
+          "nickname": "getAddressById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Attaching started",
+              "code": 202,
+              "responseModel": "AddressAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is still attached to a server. Please detach address from server and then perform the action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not of type that supports this action",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not ready for action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "server not found",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is required",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "AddressAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Address to attach"
+            },
+            {
+              "required": true,
+              "type": "AddressAttach",
+              "name": "body",
+              "paramType": "body",
+              "description": "Attachment parameters"
+            }
+          ],
+          "notes": "The address will be routed to the specified server.",
+          "summary": "Attach an address to a server",
+          "nickname": "attachAddress",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}/attach"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Detaching started",
+              "code": 202,
+              "responseModel": "AddressAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not ready for action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not of type that supports this action",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not attached to a server. Only an address attached to a server can be detached",
+              "code": 409,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "AddressAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Address to detach"
+            }
+          ],
+          "notes": "The address will stop being routed to its current server and will become available to be attached to another server.",
+          "summary": "Detach an address from a server",
+          "nickname": "detachAddress",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}/detach"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Address deletion started",
+              "code": 202,
+              "responseModel": "AddressAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is still attached to a server. Please detach address from server and then perform the action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not of type that supports this action",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not ready for action",
+              "code": 409,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "AddressAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Id of Address to destroy"
+            }
+          ],
+          "notes": "Cancels your ownership of this address.",
+          "summary": "Destroy an address",
+          "nickname": "destroyAddress",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}/destroy"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "AddressActionList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "AddressActionList",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Address to retrieve actions for"
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Action type (exact match)",
+              "type": "string",
+              "enum": [
+                "ATTACH",
+                "CREATE",
+                "DELETE",
+                "DETACH"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "notes": "Sorted newest to oldest.",
+          "summary": "List actions performed on an Address",
+          "nickname": "getAddressActionList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}/actions"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "AddressAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "AddressAction not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Address the action is performed on"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressActionId",
+              "paramType": "path",
+              "description": "Id of AddressAction to be fetched"
+            }
+          ],
+          "type": "AddressAction",
+          "summary": "Find AddressAction by id",
+          "nickname": "getAddressActionById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/addresses/{addressId}/actions/{addressActionId}"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "IpAddressCreate": {
+      "required": [],
+      "id": "IpAddressCreate",
+      "properties": {
+        "dataCenterId": {
+          "type": "string",
+          "description": "Id of the Data center where address is to be created"
+        },
+        "zoneId": {
+          "type": "string",
+          "description": "Id of the Zone where address is to be created"
+        }
+      }
+    },
+    "AddressAction": {
+      "required": [
+        "addressActionId",
+        "addressId",
+        "type",
+        "completedAt",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "AddressAction",
+      "properties": {
+        "addressActionId": {
+          "type": "string",
+          "description": "Action id"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the action was originally initiated",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "addressId": {
+          "type": "string",
+          "description": "Address the action was taken on"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ATTACH",
+            "CREATE",
+            "DELETE",
+            "DETACH"
+          ],
+          "description": "Action type"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "DateTime the action was completed by the system",
+          "format": "date-time"
+        }
+      }
+    },
+    "AddressActionList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "AddressActionList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "AddressAction"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "AddressList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "AddressList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "IpAddress"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "AddressAttach": {
+      "required": [
+        "serverId"
+      ],
+      "id": "AddressAttach",
+      "properties": {
+        "serverId": {
+          "type": "string",
+          "description": "Server to attach the address to"
+        }
+      }
+    },
+    "Pagination": {
+      "required": [
+        "next",
+        "prev",
+        "limit",
+        "total"
+      ],
+      "id": "Pagination",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Number of results requested",
+          "format": "int32"
+        },
+        "prev": {
+          "type": "string",
+          "description": "Link to previous page of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "Link to next page of results"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Number of results available",
+          "format": "int64"
+        }
+      }
+    },
+    "IpAddress": {
+      "required": [
+        "addressId",
+        "address",
+        "serverId",
+        "dataCenterId",
+        "zoneId",
+        "status",
+        "type",
+        "version",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "IpAddress",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ATTACHED",
+            "ATTACHING",
+            "DESTROYED",
+            "DESTROYING",
+            "DETACHING",
+            "NEW",
+            "READY",
+            "RESERVED"
+          ],
+          "description": "Address status"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "IPV4"
+          ],
+          "description": "Protocol version"
+        },
+        "zoneId": {
+          "type": "string",
+          "description": "Id of the Zone where address resides"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "address": {
+          "type": "string",
+          "description": "Numeric address"
+        },
+        "addressId": {
+          "type": "string",
+          "description": "Address id"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "DYNAMIC",
+            "PRIVATE",
+            "PUBLIC"
+          ],
+          "description": "Address type"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Id of the Data center where address resides"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Server the address is attached to"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

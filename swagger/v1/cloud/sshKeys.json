@@ -1,0 +1,254 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/sshKeys",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request completed successfully",
+              "code": 200,
+              "responseModel": "SSHKey"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "SSH key not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "sshKeyId",
+              "paramType": "path",
+              "description": "Id of SSH key to be fetched"
+            }
+          ],
+          "type": "SSHKey",
+          "summary": "Find SSH key by sshKeyId",
+          "nickname": "getSSHKeyById",
+          "method": "GET"
+        },
+        {
+          "responseMessages": [
+            {
+              "message": "SSH key deleted successfully",
+              "code": 204
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "SSH key not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "void",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "sshKeyId",
+              "paramType": "path",
+              "description": "Id of SSH key to be deleted"
+            }
+          ],
+          "notes": "Permanently deletes the SSH key, making it unavailable for new servers.",
+          "summary": "Delete a SSH key resource",
+          "nickname": "deleteSSHKey",
+          "method": "DELETE"
+        }
+      ],
+      "path": "/v1/cloud/sshKeys/{sshKeyId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "SSHKeyList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Authenticated user is not allowed access",
+              "code": 403,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "name",
+              "paramType": "query",
+              "description": "SSH key name filter (exact match)"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "SSHKeyList",
+          "summary": "Get a list of SSH keys.",
+          "nickname": "getSSHKeyList",
+          "method": "GET"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "SSH key created successfully",
+              "code": 201,
+              "responseModel": "SSHKey"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Your cloud is not ready. Sign up at http://cloud.godaddy.com if you haven't yet. If you have, please try again soon.",
+              "code": 403,
+              "responseModel": "Error"
+            },
+            {
+              "message": "name is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "key must be a public ssh-rsa or ssh-dsa key",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "SSHKeyCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "SSH key details"
+            }
+          ],
+          "type": "SSHKey",
+          "summary": "Create a new SSH key",
+          "nickname": "addSSHKey",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/sshKeys"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "SSHKeyList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "SSHKeyList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "SSHKey"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "SSHKeyCreate": {
+      "required": [
+        "name",
+        "key"
+      ],
+      "id": "SSHKeyCreate",
+      "properties": {
+        "key": {
+          "required": true,
+          "type": "string",
+          "description": "The SSH public key in its entirety"
+        },
+        "name": {
+          "required": true,
+          "type": "string",
+          "description": "A name to help you identify this SSH key in the future"
+        }
+      }
+    },
+    "SSHKey": {
+      "required": [
+        "sshKeyId",
+        "name",
+        "createdAt",
+        "modifiedAt",
+        "fingerprint"
+      ],
+      "id": "SSHKey",
+      "properties": {
+        "fingerprint": {
+          "type": "string",
+          "description": "Fingerprint calculated from SSH key"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this SSH key"
+        },
+        "sshKeyId": {
+          "type": "string",
+          "description": "Id of this SSH key"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

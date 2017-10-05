@@ -1,0 +1,1909 @@
+{
+  "swaggerVersion": "1.2",
+  "apiVersion": "1",
+  "basePath": "https://api.godaddy.com",
+  "apis": [
+    {
+      "path": "/v1/certificates",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_create",
+          "summary": "Create a pending order for certificate",
+          "notes": "<p>Creating a certificate order can be a long running asynchronous operation in the PKI workflow. The PKI API supports 2 options for getting the completion stateful actions for this asynchronous operations: 1) by polling operations -- see /v1/certificates/{certificateId}/actions 2) via WebHook style callback -- see '/v1/certificates/{certificateId}/callback'.</p>",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Setting locale for communications such as emails and error messages",
+              "defaultValue": "Default locale for shopper account"
+            },
+            {
+              "name": "certificateCreate",
+              "required": true,
+              "paramType": "body",
+              "type": "CertificateCreate",
+              "description": "The certificate order information"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 202,
+              "message": "Request was successful",
+              "responseModel": "CertificateIdentifier"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow renew",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`email` is not empty",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`csr` is invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/validate",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_validate",
+          "summary": "Validate a pending order for certificate",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Setting locale for communications such as emails and error messages",
+              "defaultValue": "Default locale for shopper account"
+            },
+            {
+              "name": "certificateCreate",
+              "required": true,
+              "paramType": "body",
+              "type": "CertificateCreate",
+              "description": "The certificate order info"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request validated successfully"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow renew",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`email` is not empty",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`csr` is invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/cancel",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_cancel",
+          "summary": "Cancel a pending certificate",
+          "notes": "Use the cancel call to cancel a pending certificate order.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to cancel"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Certificate order has been canceled"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow cancel",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/revoke",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_revoke",
+          "summary": "Revoke active certificate",
+          "notes": "Use revoke call to revoke an active certificate, if the certificate has not been issued a 404 response will be returned.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to revoke"
+            },
+            {
+              "name": "certificateRevoke",
+              "required": true,
+              "paramType": "body",
+              "type": "CertificateRevoke",
+              "description": "The certificate revocation request"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Certificate Revoked"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow revoke",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/download",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "certificate_download",
+          "summary": "Download certificate",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to download"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Certificate retrieved",
+              "responseModel": "CertificateBundle"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow download",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/siteSeal",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "certificate_siteseal_get",
+          "summary": "Get Site seal",
+          "notes": [
+            "<p>This method is used to obtain the site seal information for an issued certificate.",
+            " A site seal is a graphic that the certificate purchaser can embed on their web site to show",
+            " their visitors information about their SSL certificate. If a web site visitor clicks on the",
+            " site seal image, a pop-up page is displayed that contains detailed information about the SSL",
+            " certificate. The site seal token is used to link the site seal graphic image to the appropriate",
+            " certificate details pop-up page display when a user clicks on the site seal. The site seal",
+            " images are expected to be static images and hosted on the reseller's website, to minimize",
+            " delays for customer page load times.</p>"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id"
+            },
+            {
+              "name": "theme",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "enum": [
+                "DARK",
+                "LIGHT"
+              ],
+              "defaultValue": "LIGHT",
+              "description": "This value represents the visual theme of the seal. If seal doesn't exist, default values are used if params not present. If seal does exist, default values will not be used to update unless params present."
+            },
+            {
+              "name": "locale",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "defaultValue": "en",
+              "description": "Determine locale for text displayed in seal image and verification page. If seal doesn't exist, default values are used if params not present. If seal does exist, default values will not be used to update unless params present."
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Site seal retrieved",
+              "responseModel": "CertificateSiteSeal"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow seal",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "'locale' is invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "certificate_get",
+          "summary": "Retrieve certificate details",
+          "notes": "Once the certificate order has been created, this method can be used to check the status of the certificate. This method can also be used to retrieve details of the certificate.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to lookup"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Certificate details retrieved",
+              "responseModel": "Certificate"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/verifyDomainControl",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_verifydomaincontrol",
+          "summary": "Check Domain Control",
+          "notes": "Domain control is a means for verifying the domain included in the certificate order. This resource is useful for resellers that control the domains for their customers, and can expedite the verification process. See https://www.godaddy.com/help/verifying-your-domain-ownership-for-ssl-certificate-requests-html-or-dns-7452",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to lookup"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Domain control was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Domain control was not successful",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow domain control",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/reissue",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_reissue",
+          "summary": "Reissue active certificate",
+          "notes": [
+            "<p>Rekeying is the process by which the private and public key is changed for a certificate.",
+            " It is a simplified reissue,where only the CSR is changed. Reissuing is the process by which domain",
+            " names are added or removed from a certificate.Once a request is validated and approved, the certificate",
+            " will be reissued with the new common name and sans specified. Unlimited reissues are available during the",
+            " lifetime of the certificate.New names added to a certificate that do not share the base domain of the",
+            " common name may take additional time to validate. If this API call is made before a previous pending",
+            " reissue has been validated and issued, the previous reissue request is automatically rejected and replaced",
+            " with the current request.</p>"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to reissue"
+            },
+            {
+              "name": "reissueCreate",
+              "required": true,
+              "paramType": "body",
+              "type": "CertificateReissue",
+              "description": "The reissue request info"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 202,
+              "message": "Reissue request created"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow reissue",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`csr` is invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Delay revocation exceeds maximum",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/renew",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "certificate_renew",
+          "summary": "Renew active certificate",
+          "notes": [
+            "<p>Renewal is the process by which the validity of a certificate is extended.",
+            " Renewal is only available 60 days prior to expiration of the previous certificate and 30 days after the expiration of the previous certificate. ",
+            " The renewal supports modifying a set of the original certificate order information. Once a request is validated and approved, the certificate",
+            " will be issued with extended validity. Since subject alternative names can be removed during a renewal, we",
+            " require that you provide the subject alternative names you expect in the renewed certificate. New names added to a certificate that do not share the base domain of the",
+            " common name may take additional time to validate. </p>"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to renew"
+            },
+            {
+              "name": "renewCreate",
+              "required": true,
+              "paramType": "body",
+              "type": "CertificateRenew",
+              "description": "The renew request info"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 202,
+              "message": "Renew request created"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "message": "Certificate state does not allow renew",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`csr` is invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/callback",
+      "operations": [
+        {
+          "method": "PUT",
+          "nickname": "certificate_callback_replace",
+          "summary": "Register of certificate action callback",
+          "notes": "This method is used to register/replace url for callbacks for stateful actions relating to a certificate lifecycle. The callback url is a Webhook style pattern and will receive POST http requests with json body defined in the CertificateAction model definition for each certificate action.  Only one callback URL is allowed to be registered for each certificateId, so it will replace a previous registration.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to register/replace for callback"
+            },
+            {
+              "name": "callbackUrl",
+              "required": true,
+              "paramType": "query",
+              "type": "string",
+              "description": "Callback url registered/replaced to receive stateful actions"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Callback replaced/registered"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Callback url is missing",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Callback url is malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "GET",
+          "nickname": "certificate_callback_get",
+          "summary": "Retrieve system stateful action callback url",
+          "notes": "This method is used to retrieve the registered callback url for a certificate.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to register for stateful action callback"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Callback registered",
+              "responseModel": "CertificateCallback"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "nickname": "certificate_callback_delete",
+          "summary": "Unregister system callback",
+          "notes": "Unregister the callback for a particular certificate.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to unregister callback"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Callback removed"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate id not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/certificates/{certificateId}/actions",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "certificate_action_retrieve",
+          "summary": "Retrieve all certificate actions",
+          "notes": "This method is used to retrieve all stateful actions relating to a certificate lifecycle.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "certificateId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Certificate id to register for callback"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Action retrieval successful",
+              "responseModel": "[CertificateAction]"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Certificate not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CertificateReissue": {
+      "id": "CertificateReissue",
+      "properties": {
+        "csr": {
+          "type": "string",
+          "defaultValue": "Existing CSR",
+          "description": "Certificate Signing Request."
+        },
+        "subjectAlternativeNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Only used for UCC products. An array of subject alternative names to include in certificate."
+        },
+        "rootType": {
+          "type": "string",
+          "enum": [
+            "GODADDY_SHA_1",
+            "GODADDY_SHA_2",
+            "STARFIELD_SHA_1",
+            "STARFIELD_SHA_2"
+          ],
+          "defaultValue": "GODADDY_SHA_1",
+          "description": "Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "Required if client would like to receive stateful action via callback during certificate lifecyle"
+        },
+        "commonName": {
+          "type": "string",
+          "defaultValue": "Existing common name",
+          "description": "The common name of certificate to be secured"
+        },
+        "delayExistingRevoke": {
+          "type": "integer",
+          "defaultValue": "72",
+          "description": "In hours, time to delay revoking existing certificate after issuance of new certificate. If revokeExistingCertOnIssuance is enabled, this value will be ignored",
+          "maximum": "168"
+        }
+      },
+      "required": []
+    },
+    "CertificateRenew": {
+      "id": "CertificateRenew",
+      "properties": {
+        "subjectAlternativeNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Only used for UCC products. An array of subject alternative names to include in certificate. Not including a subject alternative name that was in the previous certificate will remove it from the renewed certificate."
+        },
+        "period": {
+          "type": "integer",
+          "required": false,
+          "defaultValue": "0",
+          "description": "Number of years for certificate validity period, if different from previous certificate"
+        },
+        "csr": {
+          "type": "string",
+          "defaultValue": "Existing CSR",
+          "description": "Certificate Signing Request."
+        },
+        "rootType": {
+          "type": "string",
+          "enum": [
+            "GODADDY_SHA_1",
+            "GODADDY_SHA_2",
+            "STARFIELD_SHA_1",
+            "STARFIELD_SHA_2"
+          ],
+          "defaultValue": "GODADDY_SHA_1",
+          "description": "Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "Required if client would like to receive stateful actions via callback during certificate lifecyle"
+        },
+        "commonName": {
+          "type": "string",
+          "defaultValue": "Existing common name",
+          "description": "The common name of certificate to be secured"
+        }
+      },
+      "required": []
+    },
+    "CertificateCreate": {
+      "id": "CertificateCreate",
+      "properties": {
+        "csr": {
+          "required": true,
+          "type": "string",
+          "description": "Certificate Signing Request"
+        },
+        "productType": {
+          "type": "string",
+          "enum": [
+            "DV_SSL",
+            "DV_WILDCARD_SSL",
+            "EV_SSL",
+            "OV_CS",
+            "OV_DS",
+            "OV_SSL",
+            "OV_WILDCARD_SSL",
+            "UCC_DV_SSL",
+            "UCC_EV_SSL",
+            "UCC_OV_SSL"
+          ],
+          "required": true,
+          "description": "Type of product requesting a certificate. Only required non-renewal"
+        },
+        "period": {
+          "type": "integer",
+          "required": true,
+          "description": "Number of years for certificate validity period"
+        },
+        "contact": {
+          "$ref": "CertificateContact",
+          "required": true,
+          "description": "Requestor contact information"
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Name to be secured in certificate. If provided, CN field in CSR will be ignored."
+        },
+        "subjectAlternativeNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Subject Alternative names. Collection of subjectAlternativeNames to be included in certificate."
+        },
+        "slotSize": {
+          "type": "string",
+          "enum": [
+            "FIVE",
+            "TEN",
+            "FIFTEEN",
+            "TWENTY",
+            "THIRTY",
+            "FOURTY",
+            "FIFTY",
+            "ONE_HUNDRED"
+          ],
+          "description": "Number of subject alternative names(SAN) to be included in certificate "
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "Required if client would like to receive stateful actions via callback during certificate lifecyle"
+        },
+        "rootType": {
+          "type": "string",
+          "enum": [
+            "GODADDY_SHA_1",
+            "GODADDY_SHA_2",
+            "STARFIELD_SHA_1",
+            "STARFIELD_SHA_2"
+          ],
+          "defaultValue": "STARFIELD_SHA_2",
+          "description": "Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date"
+        },
+        "intelVPro": {
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Only used for OV"
+        },
+        "organization": {
+          "$ref": "CertificateOrganizationCreate",
+          "description": "Required for EVSSL, OVSSL, CS, and DS"
+        }
+      },
+      "required": [
+        "csr",
+        "productType",
+        "period",
+        "contact"
+      ]
+    },
+    "CertificateOrganization": {
+      "id": "CertificateOrganization",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of organization that owns common name"
+        },
+        "address": {
+          "$ref": "CertificateAddress",
+          "required": true,
+          "description": "Organization presence address"
+        },
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "Phone number for organization"
+        },
+        "assumedName": {
+          "type": "string",
+          "description": "Only for EVSSL. The DBA(does business as) name for the organization."
+        },
+        "registrationNumber": {
+          "type": "string",
+          "description": "Only for EVSSL."
+        },
+        "registrationAgent": {
+          "type": "string",
+          "description": "Only for EVSSL."
+        },
+        "jurisdictionOfIncorporation": {
+          "$ref": "JurisdictionOfIncorporation",
+          "description": "Jurisdiction of Incorporation"
+        }
+      },
+      "required": [
+        "name",
+        "phone",
+        "address"
+      ]
+    },
+    "CertificateOrganizationCreate": {
+      "id": "CertificateOrganizationCreate",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of organization that owns common name"
+        },
+        "address": {
+          "$ref": "CertificateAddress",
+          "required": true,
+          "description": "Organization presence address"
+        },
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "Phone number for organization"
+        },
+        "assumedName": {
+          "type": "string",
+          "description": "Only for EVSSL. The DBA(does business as) name for the organization."
+        },
+        "registrationNumber": {
+          "type": "string",
+          "description": "Only for EVSSL."
+        },
+        "registrationAgent": {
+          "type": "string",
+          "description": "Only for EVSSL."
+        }
+      },
+      "required": [
+        "name",
+        "phone"
+      ]
+    },
+    "CertificateAddress": {
+      "id": "CertificateAddress",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "required": true,
+          "description": "Address line 1 of organization address"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code of organization address"
+        },
+        "country": {
+          "type": "string",
+          "enum": [
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AN",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BM",
+            "BN",
+            "BO",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BY",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CV",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "IQ",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MG",
+            "MH",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RU",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TP",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "YU",
+            "ZA",
+            "ZM",
+            "ZW"
+          ],
+          "required": true,
+          "format": "iso-country-code",
+          "description": "Two character country code of organization"
+        },
+        "address2": {
+          "type": "string",
+          "description": "Address line 2 of organization address"
+        },
+        "state": {
+          "type": "string",
+          "description": "Full name of State/Province/Territory of organization address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City/Locality of organization address"
+        }
+      },
+      "required": [
+        "address1",
+        "country"
+      ]
+    },
+    "CertificateContact": {
+      "id": "CertificateContact",
+      "properties": {
+        "nameFirst": {
+          "type": "string",
+          "required": true,
+          "description": "First name of requestor contact"
+        },
+        "nameLast": {
+          "type": "string",
+          "required": true,
+          "description": "Last name of requestor contact"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Email address of requestor contact"
+        },
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "Phone number for requestor contact"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Only used for EVSSL. Job title of requestor contact"
+        },
+        "suffix": {
+          "type": "string",
+          "description": "Suffix of requestor contact"
+        },
+        "nameMiddle": {
+          "type": "string",
+          "description": "Middle initial of requestor contact"
+        }
+      },
+      "required": [
+        "nameFirst",
+        "nameLast",
+        "email",
+        "phone"
+      ]
+    },
+    "JurisdictionOfIncorporation": {
+      "id": "JurisdictionOfIncorporation",
+      "properties": {
+        "country": {
+          "type": "string",
+          "format": "iso-country-code"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "country"
+      ]
+    },
+    "CertificateRevoke": {
+      "id": "CertificateRevoke",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": [
+            "AFFILIATION_CHANGED",
+            "CESSATION_OF_OPERATION",
+            "KEY_COMPROMISE",
+            "PRIVILEGE_WITHDRAWN",
+            "SUPERSEDED"
+          ],
+          "required": true,
+          "description": "Reason for revocation"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "CertificateIdentifier": {
+      "id": "CertificateIdentifier",
+      "properties": {
+        "certificateId": {
+          "type": "string",
+          "id": true,
+          "required": true,
+          "description": "The unique identifier of the certificate request. Only present if verified."
+        }
+      },
+      "required": [
+        "certificateId"
+      ]
+    },
+    "CertificateSiteSeal": {
+      "id": "CertificateSiteSeal",
+      "properties": {
+        "html": {
+          "type": "string",
+          "description": "Certificate Seal HTML"
+        }
+      },
+      "required": [
+        "html"
+      ]
+    },
+    "CertificateBundle": {
+      "id": "CertificateBundle",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of certificate requested"
+        },
+        "pems": {
+          "$ref": "PEMCertificates",
+          "description": "Certificates in PEM format"
+        }
+      },
+      "required": [
+        "serialNumber",
+        "pems"
+      ]
+    },
+    "PEMCertificates": {
+      "id": "PEMCertificates",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "End entity certificate in PEM format"
+        },
+        "intermediate": {
+          "type": "string",
+          "description": "CA Signing Intermediate certificate in PEM format"
+        },
+        "root": {
+          "type": "string",
+          "description": "CA Root certificate in PEM format"
+        },
+        "cross": {
+          "type": "string",
+          "description": "CA Cross Intermediate certificate in PEM format"
+        }
+      },
+      "required": [
+        "certificate"
+      ]
+    },
+    "Certificate": {
+      "id": "Certificate",
+      "properties": {
+        "certificateId": {
+          "type": "string",
+          "description": "The unique identifier of the certificate request. Only present if no errors returned"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING_ISSUANCE",
+            "ISSUED",
+            "REVOKED",
+            "CANCELED",
+            "DENIED",
+            "PENDING_REVOCATION",
+            "PENDING_REKEY",
+            "UNUSED",
+            "EXPIRED"
+          ],
+          "description": "Status of certificate"
+        },
+        "contact": {
+          "$ref": "CertificateContact",
+          "description": "Requestor contact information"
+        },
+        "period": {
+          "type": "integer",
+          "description": "Validity period of order. Specified in years"
+        },
+        "validStart": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The start date of the certificate's validity (if issued or revoked)."
+        },
+        "validEnd": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The end date of the certificate's validity (if issued or revoked)."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Common name of certificate"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The date the certificate was ordered."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of certificate (if issued or revoked)"
+        },
+        "serialNumberHex": {
+          "type": "string",
+          "description": "Hexadecmial format for Serial number of certificate(if issued or revoked)"
+        },
+        "productType": {
+          "type": "string",
+          "enum": [
+            "DV_SSL",
+            "DV_WILDCARD_SSL",
+            "EV_SSL",
+            "OV_CS",
+            "OV_DS",
+            "OV_SSL",
+            "OV_WILDCARD_SSL",
+            "UCC_DV_SSL",
+            "UCC_EV_SSL",
+            "UCC_OV_SSL"
+          ],
+          "description": "Certificate product type"
+        },
+        "revokedAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The revocation date of certificate (if revoked)."
+        },
+        "subjectAlternativeNames": {
+          "type": "array",
+          "items": {
+            "$ref": "SubjectAlternativeNameDetails"
+          },
+          "description": "Contains subject alternative names set"
+        },
+        "rootType": {
+          "type": "string",
+          "enum": [
+            "GODADDY_SHA_1",
+            "GODADDY_SHA_2",
+            "STARFIELD_SHA_1",
+            "STARFIELD_SHA_2"
+          ],
+          "description": "Root Type"
+        },
+        "slotSize": {
+          "type": "string",
+          "enum": [
+            "FIVE",
+            "TEN",
+            "FIFTEEN",
+            "TWENTY",
+            "THIRTY",
+            "FOURTY",
+            "FIFTY",
+            "ONE_HUNDRED"
+          ],
+          "description": "Number of subject alternative names(SAN) to be included in certificate "
+        },
+        "deniedReason": {
+          "type": "string",
+          "description": "Only present if certificate order has been denied"
+        },
+        "progress": {
+          "type": "integer",
+          "description": "Percentage of completion for certificate vetting"
+        },
+        "organization": {
+          "$ref": "CertificateOrganization",
+          "description": "Organization Name in certificate"
+        }
+      },
+      "required": [
+        "certificateId",
+        "status",
+        "contact",
+        "period",
+        "createdAt",
+        "productType"
+      ]
+    },
+    "SubjectAlternativeNameDetails": {
+      "id": "SubjectAlternativeNameDetails",
+      "properties": {
+        "subjectAlternativeName": {
+          "type": "string",
+          "description": "Subject alternative name to be included in certificate"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "INVALID",
+            "COMPLETED",
+            "FRAUD"
+          ],
+          "description": "Total number of page results"
+        }
+      },
+      "required": [
+        "subjectAlternativeName",
+        "status"
+      ]
+    },
+    "CertificateCallback": {
+      "id": "CertificateCallback",
+      "properties": {
+        "callbackUrl": {
+          "type": "string",
+          "description": "Callback url registered to receive stateful actions"
+        }
+      },
+      "required": [
+        "callbackUrl"
+      ]
+    },
+    "CertificateAction": {
+      "id": "CertificateAction",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "CERTIFICATE_ISSUED",
+            "CERTIFICATE_ORDER_CANCELED",
+            "CERTIFICATE_ORDER_CREATED",
+            "CERTIFICATE_REVOKED",
+            "DOMAIN_VALIDATION_COMPLETE",
+            "FRAUD_DETECTED",
+            "ORG_NAME_CHANGE",
+            "ORG_VALIDATION_COMPLETE",
+            "SAN_DROP"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "Date action created"
+        }
+      },
+      "required": [
+        "type",
+        "createdAt"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to the field within the submitted data containing an error"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "Error": {
+      "id": "Error",
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "minItems": 1,
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    }
+  }
+}

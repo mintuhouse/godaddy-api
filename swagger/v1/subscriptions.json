@@ -1,0 +1,936 @@
+{
+  "apiVersion": "0.0.1",
+  "swaggerVersion": "1.2",
+  "basePath": "https://api.godaddy.com",
+  "resourcePath": "/v1/subscriptions",
+  "apis": [
+    {
+      "path": "/v1/subscriptions/{subscriptionId}",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "get",
+          "type": "Subscription",
+          "summary": "Retrieve details for the specified Subscription",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID to be operated on, if different from JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market in which the request is happening"
+            },
+            {
+              "name": "subscriptionId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Unique identifier of the Subscription to retrieve"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "Subscription"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Invalid Subscription Id",
+              "x-error-code": "INVALID_SUBSCRIPTION_ID",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        },
+        {
+          "method": "PATCH",
+          "nickname": "update",
+          "summary": "Update details for the specified Subscription",
+          "notes": [
+            "Only Subscription properties that can be changed without immediate",
+            "financial impact can be modified via PATCH, whereas some properties",
+            "can be changed by purchasing a renewal<br/>",
+            "<strong>This endpoint only supports JWT authentication</strong>"
+          ],
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Unique identifier of the Subscription to update"
+            },
+            {
+              "name": "subscription",
+              "required": true,
+              "paramType": "body",
+              "type": "SubscriptionUpdate",
+              "description": "Details of the Subscription to change"
+            }
+          ],
+          "produces": [
+            "application/json",
+            "application/xml"
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "This method only supports JWT authentication",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Subscription not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Payment profile not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "nickname": "cancel",
+          "type": "void",
+          "summary": "Cancel the specified Subscription",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID to cancel subscriptions for when not using JWT"
+            },
+            {
+              "name": "subscriptionId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "Unique identifier of the Subscription to cancel"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Failed to determine if the domain is protected (invalid domain ID)",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Invalid Subscription Id",
+              "x-error-code": "INVALID_SUBSCRIPTION_ID",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "The Office 365 Subscription cannot be cancelled (shopper is migrating)",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "The Subscription cannot be cancelled",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "The Subscription cannot be cancelled (PFID is disabled for cancellation)",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "The Subscription cannot be cancelled (domain is protected)",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "The domain alert Subscription cannot be cancelled",
+              "x-error-code": "CANNOT_CANCEL_SUBSCRIPTION",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Failed to determine if the Office 365 account is migrating",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Failed to determine if the domain alert is cancellable",
+              "x-error-code": "ERROR_INTERNAL",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Failed to determine if the domain is protected",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/subscriptions",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "list",
+          "type": "SubscriptionList",
+          "summary": "Retrieve a list of Subscriptions for the specified Shopper",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID to return subscriptions for when not using JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "defaultValue": "en-US",
+              "description": "The market that the response should be formatted for"
+            },
+            {
+              "name": "productGroupKeys",
+              "required": false,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Only return Subscriptions with the specified product groups"
+            },
+            {
+              "name": "includes",
+              "required": false,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "addons",
+                "relations"
+              ],
+              "description": "Optional details to be included in the response"
+            },
+            {
+              "name": "offset",
+              "required": false,
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "description": "Number of Subscriptions to skip before starting to return paged results (must be a multiple of the limit)"
+            },
+            {
+              "name": "limit",
+              "required": false,
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 25,
+              "minimum": 1,
+              "maximum": 2000,
+              "description": "Number of Subscriptions to retrieve in this page, starting after offset"
+            },
+            {
+              "name": "sort",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "defaultValue": "-expiresAt",
+              "enum": [
+                "expiresAt",
+                "-expiresAt"
+              ],
+              "description": "Property name that will be used to sort results. \"-\" indicates descending"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "SubscriptionList"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Invalid query parameter (custom message returned for each parameter)",
+              "x-error-code": "INVALID_VALUE_ENUM",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/subscriptions/productGroups",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "productGroups",
+          "type": "array",
+          "items": {
+            "type": "ProductGroup"
+          },
+          "summary": "Retrieve a list of ProductGroups for the specified Shopper",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID to return data for when not using JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "defaultValue": "en-US",
+              "description": "The market that the response should be formatted for"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "[ProductGroup]"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/xml",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml",
+    "text/xml",
+    "application/javascript",
+    "text/javascript"
+  ],
+  "models": {
+    "Subscription": {
+      "id": "Subscription",
+      "additionalProperties": false,
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Unique identifier of the Subscription"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "PENDING",
+            "CANCELED"
+          ],
+          "description": "Whether the Subscription is active or the specific non-active state"
+        },
+        "label": {
+          "type": "string",
+          "description": "A human readable description of this Subscription"
+        },
+        "launchUrl": {
+          "type": "string",
+          "format": "url",
+          "description": "The url to use or manage this Subscription's active product"
+        },
+        "product": {
+          "$ref": "SubscriptionProduct"
+        },
+        "addons": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "SubscriptionAddon"
+          },
+          "description": "An array of additional products that have been purchased to augment this Subscription"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "When the Subscription was created"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "When the Subscription will expire"
+        },
+        "billing": {
+          "$ref": "SubscriptionBilling"
+        },
+        "renewable": {
+          "type": "boolean",
+          "description": "Whether or not the Subscription is allowed to be renewed"
+        },
+        "upgradeable": {
+          "type": "boolean",
+          "description": "Whether or not the Subscription is allowed to be upgraded"
+        },
+        "cancelable": {
+          "type": "boolean",
+          "description": "Whether or not the Subscription is allowed to be canceled"
+        },
+        "priceLocked": {
+          "type": "boolean",
+          "description": "Whether the renewal price will be based from the list price or a locked-in price for this shopper"
+        },
+        "renewAuto": {
+          "type": "boolean",
+          "description": "Whether or not the Subscription is set to be automatically renewed via the billing agent"
+        },
+        "paymentProfileId": {
+          "type": "integer",
+          "description": "Unique identifier of the payment profile that will be used to automatically renew this Subscription"
+        },
+        "relations": {
+          "$ref": "SubscriptionRelations"
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "status",
+        "product",
+        "createdAt",
+        "billing",
+        "renewable",
+        "upgradeable",
+        "priceLocked",
+        "renewAuto"
+      ]
+    },
+    "SubscriptionUpdate": {
+      "id": "SubscriptionUpdate",
+      "properties": {
+        "renewAuto": {
+          "type": "boolean",
+          "description": "Whether or not you want the Subscription renew automatically"
+        },
+        "paymentProfileId": {
+          "type": "integer",
+          "description": "Unique identifier of the payment profile you want to be used for automatic renewal"
+        }
+      }
+    },
+    "SubscriptionProduct": {
+      "id": "SubscriptionProduct",
+      "additionalProperties": false,
+      "properties": {
+        "pfid": {
+          "type": "integer",
+          "description": "Unique identifier of the Product that is subscribed"
+        },
+        "label": {
+          "type": "string",
+          "description": "A human readable description of the Product that is subscribed"
+        },
+        "renewalPfid": {
+          "type": "integer",
+          "description": "Unique identifier of the renewal Product"
+        },
+        "renewalPeriod": {
+          "type": "integer",
+          "description": "The number of `renewalPeriodUnits` that will be added by the `renewalPfid`"
+        },
+        "renewalPeriodUnit": {
+          "type": "string",
+          "enum": [
+            "MONTH",
+            "QUARTER",
+            "SEMI_ANNUAL",
+            "YEAR"
+          ],
+          "description": "The unit of time that `renewalPeriod` is measured in"
+        },
+        "productGroupKey": {
+          "type": "string",
+          "description": "Primary key of a grouping of related Subscriptions"
+        },
+        "supportBillOn": {
+          "type": "boolean",
+          "description": "Whether the product supports the `billOn` option on the renewal endpoint"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Grouping of related Subscriptions"
+        }
+      },
+      "required": [
+        "pfid",
+        "label",
+        "renewalPfid",
+        "renewalPeriod",
+        "renewalPeriodUnit",
+        "productGroupKey",
+        "supportBillOn",
+        "namespace"
+      ]
+    },
+    "SubscriptionAddon": {
+      "id": "SubscriptionAddon",
+      "additionalProperties": false,
+      "properties": {
+        "pfid": {
+          "type": "integer",
+          "description": "Unique identifier of the add-in product"
+        },
+        "commitment": {
+          "type": "string",
+          "enum": [
+            "PAID",
+            "FREE",
+            "TRIAL"
+          ],
+          "description": "The financial commitment the customer has in the product"
+        },
+        "quantity": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "pfid",
+        "commitment",
+        "quantity"
+      ]
+    },
+    "SubscriptionBilling": {
+      "id": "SubscriptionBilling",
+      "additionalProperties": false,
+      "properties": {
+        "renewAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The point in time after which the Subscription will bill for automatic renewal"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CURRENT",
+            "PAST_DUE"
+          ],
+          "description": "Whether payments are past due"
+        },
+        "commitment": {
+          "type": "string",
+          "enum": [
+            "PAID",
+            "FREE",
+            "TRIAL"
+          ],
+          "description": "The financial commitment the customer has in the product"
+        },
+        "pastDueTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ADDON",
+              "BURST",
+              "SUBSCRIPTION"
+            ]
+          },
+          "minLength": 1,
+          "description": "The types of charges that are past due when `status` is PAST_DUE"
+        }
+      },
+      "required": [
+        "renewAt",
+        "status",
+        "commitment"
+      ]
+    },
+    "SubscriptionRelations": {
+      "id": "SubscriptionRelations",
+      "additionalProperties": false,
+      "properties": {
+        "parent": {
+          "type": "string",
+          "description": "Unique identifier of this Subscription's parent"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A set of related Subscriptions that will be canceled automatically if this Subscription is canceled"
+        }
+      },
+      "required": []
+    },
+    "Error": {
+      "id": "Error",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "<ul>\n<li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>\n<strong style='margin-left: 12px;'>OR</strong>\n<li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>\n</ul>"
+        },
+        "pathRelated": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to a field containing an error, which is referenced by `path`"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "ErrorLimit": {
+      "id": "ErrorLimit",
+      "additionalProperties": false,
+      "properties": {
+        "retryAfterSec": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "Number of seconds to wait before attempting a similar request"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "retryAfterSec",
+        "code"
+      ]
+    },
+    "SubscriptionList": {
+      "id": "SubscriptionList",
+      "additionalProperties": false,
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "Subscription"
+          },
+          "description": "A collection of subscriptions"
+        },
+        "pagination": {
+          "$ref": "Pagination",
+          "description": "Pagination information"
+        }
+      },
+      "required": [
+        "subscriptions",
+        "pagination"
+      ]
+    },
+    "Pagination": {
+      "id": "Pagination",
+      "additionalProperties": false,
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "URI to access the first page"
+        },
+        "previous": {
+          "type": "string",
+          "description": "URI to access the previous page"
+        },
+        "next": {
+          "type": "string",
+          "description": "URI to access the next page"
+        },
+        "last": {
+          "type": "string",
+          "description": "URI to access the last page"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Number of records available"
+        }
+      },
+      "required": []
+    },
+    "ProductGroup": {
+      "id": "ProductGroup",
+      "additionalProperties": false,
+      "properties": {
+        "productGroupKey": {
+          "type": "string",
+          "description": "Primary key of a grouping of related Subscriptions"
+        },
+        "subscriptionCount": {
+          "type": "integer",
+          "description": "The number of Subscriptions that the shopper owns in this group"
+        }
+      },
+      "required": [
+        "productGroupKey",
+        "subscriptionCount"
+      ]
+    }
+  }
+}

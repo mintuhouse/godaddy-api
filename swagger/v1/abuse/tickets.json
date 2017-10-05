@@ -1,0 +1,464 @@
+{
+  "swaggerVersion": "1.2",
+  "apiVersion": "1.0.0",
+  "basePath": "https://api.godaddy.com",
+  "apis": [
+    {
+      "path": "/v1/abuse/tickets",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "getTickets",
+          "summary": [
+            "List all abuse tickets ids that match user provided filters"
+          ],
+          "parameters": [
+            {
+              "name": "type",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "enum": [
+                "A_RECORD",
+                "CHILD_ABUSE",
+                "CONTENT",
+                "FRAUD_WIRE",
+                "IP_BLOCK",
+                "MALWARE",
+                "NETWORK_ABUSE",
+                "PHISHING",
+                "SPAM"
+              ],
+              "description": "The type of abuse."
+            },
+            {
+              "name": "closed",
+              "required": false,
+              "paramType": "query",
+              "defaultValue": false,
+              "type": "boolean",
+              "description": "Is this abuse ticket closed?"
+            },
+            {
+              "name": "sourceDomainOrIp",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "format": "host-name-or-ip-address",
+              "maxLength": 250,
+              "description": "The domain name or ip address abuse originated from"
+            },
+            {
+              "name": "target",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "maxLength": 250,
+              "description": "The brand/company the abuse is targeting. ie: brand name/bank name"
+            },
+            {
+              "name": "createdStart",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "format": "iso-datetime",
+              "description": "The earliest abuse ticket creation date to pull abuse tickets for"
+            },
+            {
+              "name": "createdEnd",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "format": "iso-datetime",
+              "description": "The latest abuse ticket creation date to pull abuse tickets for"
+            },
+            {
+              "name": "limit",
+              "required": false,
+              "paramType": "query",
+              "type": "integer",
+              "format": "integer-positive",
+              "defaultValue": "100",
+              "maximum": "100",
+              "description": "Number of abuse ticket numbers to return."
+            },
+            {
+              "name": "offset",
+              "required": false,
+              "paramType": "query",
+              "type": "integer",
+              "format": "integer-positive",
+              "defaultValue": "0",
+              "description": "The earliest result set record number to pull abuse tickets for"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Success",
+              "responseModel": "AbuseTicketList"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Error",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "POST",
+          "nickname": "createTicket",
+          "summary": [
+            "Create a new abuse ticket"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "required": true,
+              "paramType": "body",
+              "type": "AbuseTicketCreate",
+              "description": "The endpoint which allows the Reporter to create a new abuse ticket"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 201,
+              "message": "Success",
+              "responseModel": "AbuseTicketId"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/abuse/tickets/{ticketId}",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "getTicketInfo",
+          "summary": [
+            "Return the abuse ticket data for a given ticket id"
+          ],
+          "parameters": [
+            {
+              "name": "ticketId",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "maxLength": 40,
+              "description": "A unique abuse ticket identifier"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Success",
+              "responseModel": "AbuseTicket"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Invalid ticket id provided",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "AbuseTicketId": {
+      "id": "AbuseTicketId",
+      "description": "The primary key of a newly created abuse ticket",
+      "properties": {
+        "ticketId": {
+          "type": "string",
+          "description": "Abuse ticket ID"
+        }
+      },
+      "required": [
+        "ticketId"
+      ]
+    },
+    "AbuseTicket": {
+      "id": "AbuseTicket",
+      "description": "The associated fields returned, given a unique abuse ticket id",
+      "properties": {
+        "ticketId": {
+          "type": "string",
+          "description": "Abuse ticket ID"
+        },
+        "reporter": {
+          "type": "string",
+          "description": "The shopper id of the person who reported the suspected abuse"
+        },
+        "domainIp": {
+          "type": "string",
+          "description": "The domain or IP the suspected abuse was reported against"
+        },
+        "closed": {
+          "type": "boolean",
+          "description": "Is this abuse ticket closed?",
+          "defaultValue": false
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of abuse being reported",
+          "enum": [
+            "A_RECORD",
+            "CHILD_ABUSE",
+            "CONTENT",
+            "FRAUD_WIRE",
+            "IP_BLOCK",
+            "MALWARE",
+            "NETWORK_ABUSE",
+            "PHISHING",
+            "SPAM"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "The company the suspected abuse is targeting"
+        },
+        "source": {
+          "type": "string",
+          "description": "The single URL or IP the suspected abuse was reported against"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The date the abuse ticket was created"
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "The date the abuse ticket was closed"
+        }
+      },
+      "required": [
+        "ticketId",
+        "reporter",
+        "domainIp",
+        "closed",
+        "type",
+        "target",
+        "source",
+        "createdAt",
+        "closedAt"
+      ]
+    },
+    "Pagination": {
+      "id": "Pagination",
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "Optional link to first list of results"
+        },
+        "previous": {
+          "type": "string",
+          "description": "Optional link to previous list of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "Optional link to next list of results"
+        },
+        "last": {
+          "type": "string",
+          "description": "Optional link to last list of results"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Number of records available"
+        }
+      }
+    },
+    "AbuseTicketList": {
+      "id": "AbuseTicketList",
+      "properties": {
+        "ticketIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of abuse ticket ids originated by this reporter."
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      },
+      "required": [
+        "ticketIds"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "1) JSONPath referring to the field within the data containing an error<br/>or<br/>2) JSONPath referring to an object containing an error"
+        },
+        "pathRelated": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to the field on the object referenced by `path` containing an error"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "Error": {
+      "id": "Error",
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "minItems": 1,
+          "description": "List of the specific fields, and the errors found with their contents"
+        },
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": [
+            "Stack trace indicating where the error occurred.<br/>",
+            "NOTE: This attribute <strong>MAY</strong> be included for Development and Test environments.",
+            "However, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems."
+          ]
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "AbuseTicketCreate": {
+      "id": "AbuseTicketCreate",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "required": true,
+          "paramType": "query",
+          "type": "string",
+          "enum": [
+            "A_RECORD",
+            "CHILD_ABUSE",
+            "CONTENT",
+            "FRAUD_WIRE",
+            "IP_BLOCK",
+            "MALWARE",
+            "NETWORK_ABUSE",
+            "PHISHING",
+            "SPAM"
+          ],
+          "description": "The type of abuse being reported."
+        },
+        "source": {
+          "required": true,
+          "paramType": "query",
+          "type": "string",
+          "maxLength": 250,
+          "description": "The URL or IP where live abuse content is located at. ie: https://www.example.com/bad_stuff/bad.php"
+        },
+        "target": {
+          "required": false,
+          "paramType": "query",
+          "type": "string",
+          "maxLength": 250,
+          "description": "The brand/company the abuse is targeting. ie: brand name/bank name"
+        },
+        "proxy": {
+          "required": false,
+          "paramType": "query",
+          "type": "string",
+          "maxLength": 250,
+          "description": "The Proxy information required to view the abuse being reported. ie: Specific IP used, or country of IP viewing from"
+        },
+        "intentional": {
+          "required": false,
+          "paramType": "query",
+          "type": "boolean",
+          "defaultValue": false,
+          "description": "Do you believe this is intentional abuse by the domain holder?"
+        },
+        "info": {
+          "required": false,
+          "paramType": "query",
+          "type": "string",
+          "maxLength": 250,
+          "description": "Additional information that may assist the abuse investigator. ie: server logs or email headers/body for SPAM"
+        },
+        "infoUrl": {
+          "required": false,
+          "paramType": "query",
+          "type": "string",
+          "format": "url",
+          "maxLength": 250,
+          "description": "Reporter URL if housing additional information that may assist the abuse investigator"
+        }
+      },
+      "required": []
+    }
+  }
+}

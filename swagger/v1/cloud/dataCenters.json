@@ -1,0 +1,337 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/dataCenters",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "DataCenter"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Data center not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "dataCenterId",
+              "paramType": "path",
+              "description": "Id of data center to be fetched"
+            }
+          ],
+          "type": "DataCenter",
+          "summary": "Find data center by dataCenterId",
+          "nickname": "getDataCenterById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/dataCenters/{dataCenterId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "DataCenterList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "name",
+              "paramType": "query",
+              "description": "Data center name filter (exact match)"
+            },
+            {
+              "required": false,
+              "name": "region",
+              "paramType": "query",
+              "description": "Region the data center is in (exact match)",
+              "type": "string",
+              "enum": [
+                "ASIA",
+                "EUROPE",
+                "USA"
+              ]
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Data center status filter (exact match)",
+              "type": "string",
+              "enum": [
+                "COMING_SOON",
+                "LIVE"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "DataCenterList",
+          "summary": "Get a list of data centers",
+          "nickname": "getDataCenterList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/dataCenters"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "Zone"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "dataCenterId",
+              "paramType": "path",
+              "description": "Id of parent Data Center"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "zoneId",
+              "paramType": "path",
+              "description": "Id of Zone to be fetched"
+            }
+          ],
+          "type": "Zone",
+          "summary": "Get Zone by id",
+          "nickname": "getZoneById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/dataCenters/{dataCenterId}/zones/{zoneId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ZoneList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "dataCenterId",
+              "paramType": "path",
+              "description": "Retrieve all zones for a given data center"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Retrieve all zones with this status",
+              "type": "string",
+              "enum": [
+                "COMING_SOON",
+                "FULL",
+                "LIVE"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "ZoneList",
+          "summary": "List of zones in data center",
+          "nickname": "getDataCenterZoneList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/dataCenters/{dataCenterId}/zones"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "ZoneList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "ZoneList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "Zone"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "Zone": {
+      "required": [
+        "zoneId",
+        "dataCenterId",
+        "status",
+        "supportsVolumes"
+      ],
+      "id": "Zone",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMING_SOON",
+            "FULL",
+            "LIVE"
+          ],
+          "description": "Status of the zone"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Id of the data center"
+        },
+        "supportsVolumes": {
+          "type": "boolean",
+          "description": "True if volumes can be created in this zone"
+        },
+        "zoneId": {
+          "type": "string",
+          "description": "Id of the zone"
+        }
+      }
+    },
+    "DataCenterList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "DataCenterList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "DataCenter"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "DataCenter": {
+      "required": [
+        "dataCenterId",
+        "name",
+        "emailRelay",
+        "status"
+      ],
+      "id": "DataCenter",
+      "properties": {
+        "region": {
+          "type": "string",
+          "enum": [
+            "ASIA",
+            "EUROPE",
+            "USA"
+          ],
+          "description": "Region this data center is in"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMING_SOON",
+            "LIVE"
+          ],
+          "description": "Status of this data center"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this data center"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Id of this data center"
+        },
+        "emailRelay": {
+          "type": "string",
+          "description": "Email relay for this data center. For example: smtp.domain.tld[:port]. Default port is 25."
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/limits",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "Limits"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [],
+          "type": "Limits",
+          "summary": "Get resource limits for your Cloud account",
+          "nickname": "getLimits",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/limits"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "Limits": {
+      "required": [
+        "servers",
+        "snapshots",
+        "keys",
+        "addresses"
+      ],
+      "id": "Limits",
+      "properties": {
+        "servers": {
+          "$ref": "Limit"
+        },
+        "addresses": {
+          "$ref": "Limit"
+        },
+        "volumeGb": {
+          "$ref": "Limit"
+        },
+        "snapshots": {
+          "$ref": "Limit"
+        },
+        "keys": {
+          "$ref": "Limit"
+        }
+      }
+    },
+    "Limit": {
+      "required": [
+        "limit",
+        "used",
+        "available"
+      ],
+      "id": "Limit",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "used": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "available": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

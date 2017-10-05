@@ -1,0 +1,1258 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/servers",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "Server"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "Id of server to be fetched"
+            }
+          ],
+          "type": "Server",
+          "summary": "Find server by serverId",
+          "nickname": "getServerById",
+          "method": "GET"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "EmailPreference"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of server to be updated"
+            },
+            {
+              "required": true,
+              "type": "Server",
+              "name": "body",
+              "paramType": "body",
+              "description": "Server data"
+            }
+          ],
+          "type": "Server",
+          "summary": "Update server details",
+          "nickname": "patchServer",
+          "method": "PATCH"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Server creation started",
+              "code": 202,
+              "responseModel": "Server"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Your cloud is not ready. Sign up at http://cloud.godaddy.com if you haven't yet. If you have, please try again soon.",
+              "code": 403,
+              "responseModel": "Error"
+            },
+            {
+              "message": "image is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "This image is deprecated or destroyed and cannot be used for new servers.  Choose an image with status \"LIVE\" or \"ARCHIVED\".",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "This image is not ready yet.  Try again later, or choose an image with status \"LIVE\".",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "image not found",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "spec is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "username is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Username is too long (maximum 32 characters)",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Invalid character in username.  Must start with lowercase letter or underscore (_), followed by up to 31 lowercase letters, digits, or underscores.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Username is a reserved system username",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "password or key is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "keyId not found",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Password is too short (minimum 8 characters)",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Password does not contain a lower case letter",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Password does not contain an upper case letter",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Password does not contain a number",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Password does not contain a special character",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "hostname is required",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "The hostname must be 64 characters or less and match the following regular expression: ^[a-zA-Z0-9]([-\\.]{0,1}[a-zA-Z0-9]+)*$",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "server limit reached",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "There is a mismatch between the disk size of the chosen spec and the disk size of the image. Please choose a spec with a big enough disk size.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "There is a mismatch between the ram size of the chosen spec and the minimum ram requirement of the image. Please choose a spec that meets the minimum ram requirement of the image.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address is not ready for action",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Discount code not found",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Discount code already used",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Discount code has expired",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Discount code does not match selected server spec",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Datacenter does not exist.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "The image imageId provided doesn't exist in Datacenter dataCenterId.",
+              "code": 400,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Boot script must be no larger than bootScriptKbSizeLimit bytes. Actual size: bootScriptKbSize bytes.",
+              "code": 400,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone does not exist in selected datacenter.",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Zone is not available; choose a LIVE one or try again later",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "Server",
+          "parameters": [
+            {
+              "required": true,
+              "type": "ServerCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "server details"
+            }
+          ],
+          "notes": "Use to initiate the provisioning process for a new server",
+          "summary": "Create a new server",
+          "nickname": "addServer",
+          "method": "POST"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ServerList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Server status filter (exact match)",
+              "type": "string",
+              "enum": [
+                "BUILDING",
+                "CONFIGURING_NETWORK",
+                "DESTROYED",
+                "DESTROYING",
+                "NEW",
+                "RUNNING",
+                "STARTING",
+                "STOPPED",
+                "STOPPING",
+                "VERIFYING"
+              ]
+            },
+            {
+              "required": false,
+              "type": "boolean",
+              "name": "backupsEnabled",
+              "paramType": "query",
+              "description": "BackupsEnabled flag"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "ServerList",
+          "summary": "Get a list of servers. By default, all destroyed servers are filtered out.",
+          "nickname": "getServerList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Server deletion started",
+              "code": 202,
+              "responseModel": "ServerAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is not ready to perform this action.",
+              "code": 409,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "ServerAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "Id of server to be destroyed"
+            }
+          ],
+          "notes": "Use to initiate the shutdown and destruction of an existing server.",
+          "summary": "Destroy an existing server",
+          "nickname": "destroyServer",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/destroy"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 202,
+              "responseModel": "ServerAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "serverId not found",
+              "code": 404,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server must be in STOPPED status to perform this action.",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server task state must be empty to perform this action.",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is in error state and cannot be started or stopped in this state.",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "ServerAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of server to be started"
+            }
+          ],
+          "notes": "Use to start a stopped server",
+          "summary": "Start a server",
+          "nickname": "startServer",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/start"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 202,
+              "responseModel": "ServerAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "serverId not found",
+              "code": 422,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server must be in RUNNING status to perform this action.",
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server is in error state and cannot be started or stopped in this state.",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "ServerAction",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of server to be stopped"
+            }
+          ],
+          "notes": "Use to stop a running server",
+          "summary": "Stop a server",
+          "nickname": "stopServer",
+          "method": "POST"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/stop"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Console opened successfully",
+              "code": 200,
+              "responseModel": "Console"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Server not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "Console",
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "Server to access (serverId)"
+            }
+          ],
+          "notes": "This URL can be viewed in a web browser, and allows you to access your server even when its network is down because of misconfigured interfaces or iptables rules, or when it is failing to boot properly.",
+          "summary": "Get a console URL to this server",
+          "nickname": "console",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/console"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "IpAddress"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Address not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of associated server"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "addressId",
+              "paramType": "path",
+              "description": "Id of Address to be fetched"
+            }
+          ],
+          "type": "IpAddress",
+          "summary": "Find Addresses by serverId and addressId",
+          "nickname": "getServerAddressById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/addresses/{addressId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "AddressList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of associated server"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "address",
+              "paramType": "query",
+              "description": "Numeric address (exact match)"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Address status (exact match)",
+              "type": "string",
+              "enum": [
+                "ATTACHED",
+                "ATTACHING",
+                "DESTROYED",
+                "DESTROYING",
+                "DETACHED",
+                "DETACHING",
+                "ERROR",
+                "NEW",
+                "READY",
+                "RESERVED"
+              ]
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Address type (exact match)",
+              "type": "string",
+              "enum": [
+                "DYNAMIC",
+                "PRIVATE",
+                "PUBLIC"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "AddressList",
+          "summary": "List of Addresses of the specified server",
+          "nickname": "getServerAddressList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/addresses"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ServerAction"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "ServerAction not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of associated server"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverActionId",
+              "paramType": "path",
+              "description": "Id of ServerAction to be fetched"
+            }
+          ],
+          "type": "ServerAction",
+          "summary": "Get ServerAction by id",
+          "nickname": "getServerActionById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/actions/{serverActionId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "ServerActionList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of associated server"
+            },
+            {
+              "required": false,
+              "name": "type",
+              "paramType": "query",
+              "description": "Action type filter (exact match)",
+              "type": "string",
+              "enum": [
+                "CREATE",
+                "DELETE",
+                "RESTORE",
+                "START",
+                "STOP"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "ServerActionList",
+          "summary": "List of actions performed on the specified server",
+          "nickname": "getServerActionList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/actions"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "Volume"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Volume not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId of associated server"
+            },
+            {
+              "required": true,
+              "type": "string",
+              "name": "volumeId",
+              "paramType": "path",
+              "description": "Id of volume to be fetched"
+            }
+          ],
+          "type": "Volume",
+          "summary": "Find volume by serverId and volumeId",
+          "nickname": "getServerVolumeById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/volumes/{volumeId}"
+    },
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "VolumeList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "serverId",
+              "paramType": "path",
+              "description": "serverId filter"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "zoneId",
+              "paramType": "query",
+              "description": "zoneId filter"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Volume status (exact match)",
+              "type": "string",
+              "enum": [
+                "ATTACHED",
+                "ATTACHING",
+                "CREATING",
+                "DESTROYED",
+                "DESTROYING",
+                "DETACHED",
+                "DETACHING",
+                "ERROR",
+                "NEW",
+                "READY",
+                "RESERVED"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "volumeSpecId",
+              "paramType": "query",
+              "description": "Filter by the volume spec id"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "VolumeList",
+          "summary": "Get a list of volumes for server",
+          "nickname": "getServerVolumeList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/servers/{serverId}/volumes"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "ServerActionList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "ServerActionList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "ServerAction"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "ServerCreate": {
+      "required": [
+        "hostname",
+        "image",
+        "spec",
+        "username"
+      ],
+      "id": "ServerCreate",
+      "properties": {
+        "backupsEnabled": {
+          "type": "boolean",
+          "description": "Server is periodically backed up by the system",
+          "notes": "The server will pause, blocking all I/O, for a short period while the backup is created.  Backups are images and as such can be used when creating new servers."
+        },
+        "sshKeyId": {
+          "type": "string",
+          "description": "Id of the SSH key to use for the initial user. password or key is required.",
+          "notes": "Key is placed in ~/.ssh/authorized_keys."
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of volume ids to attach on server boot",
+          "notes": "If supplied, each item in the array must be a volumeId. Each volume must exist in READY status."
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Data center where server is to be created in (name or id)"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of dynamic ip addresses to attach on server boot",
+          "notes": "If supplied, each item in the array may either be an ip address or an addressId. Each address must exist in READY status."
+        },
+        "spec": {
+          "type": "string",
+          "description": "Spec to build server with (name or id)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Free form field used to provide a server description"
+        },
+        "zoneId": {
+          "type": "string",
+          "description": "Zone where server is to be created in"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 8,
+          "description": "Password for the initial user; 8-14 characters. password or key is required.",
+          "notes": "This field is write-only.Rest assured your unencrypted password will not be saved."
+        },
+        "hostname": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([-\\.]{0,1}[a-zA-Z0-9]+)*$",
+          "description": "Hostname for the server"
+        },
+        "bootScript": {
+          "type": "string",
+          "description": "Script to be executed by your server on first boot."
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "/^[a-z_][a-z0-9_]{,31}$/",
+          "description": "User added to the server with full access; 5-16 characters",
+          "notes": "User can escalate privilege with the sudo command."
+        },
+        "discount": {
+          "type": "string",
+          "description": "Discount code to be applied to the server"
+        },
+        "image": {
+          "type": "string",
+          "description": "Image to build server with (name or id)"
+        }
+      }
+    },
+    "ServerAction": {
+      "required": [
+        "serverActionId",
+        "serverId",
+        "type",
+        "completedAt",
+        "createdAt",
+        "modifiedAt"
+      ],
+      "id": "ServerAction",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "FAILED",
+            "PENDING"
+          ],
+          "description": "Represents the state of the ServerAction"
+        },
+        "serverActionId": {
+          "type": "string",
+          "description": "Id of this ServerAction resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the action was originally initiated",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "CREATE",
+            "DELETE",
+            "RESTORE",
+            "START",
+            "STOP"
+          ],
+          "description": "Action type of this ServerAction"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "DateTime the action was completed by the system",
+          "format": "date-time"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Foreign key to Server resource"
+        }
+      }
+    },
+    "Console": {
+      "required": [
+        "url",
+        "type"
+      ],
+      "id": "Console",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SPICE_HTML5"
+          ],
+          "description": "Console type"
+        },
+        "url": {
+          "type": "string",
+          "description": "Console URL to the server"
+        }
+      }
+    },
+    "ServerList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "ServerList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "Server"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "id": "Error",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Short description of the error suitable for a human developer to read in the en-US locale"
+        },
+        "code": {
+          "type": "string",
+          "description": "Short identifier for the error suitable for indicating the specific error within client code"
+        }
+      }
+    },
+    "Server": {
+      "required": [
+        "serverId",
+        "dataCenterId",
+        "zoneId",
+        "hostname",
+        "publicIp",
+        "privateIp",
+        "status",
+        "imageId",
+        "specId",
+        "taskState",
+        "username",
+        "sshKeyId",
+        "backupsEnabled",
+        "createdAt",
+        "modifiedAt",
+        "description"
+      ],
+      "id": "Server",
+      "properties": {
+        "privateIp": {
+          "type": "string",
+          "description": "Private IP address for this Server resource"
+        },
+        "imageId": {
+          "type": "string",
+          "description": "Image server was built with"
+        },
+        "backupsEnabled": {
+          "type": "boolean",
+          "description": "Server is periodically backed up by the system. The server will pause, blocking all I/O, for a short period while the backup is created. Backups are images and as such can be used when creating new servers."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free form field used to provide a server description"
+        },
+        "specId": {
+          "type": "string",
+          "description": "Spec server was built with"
+        },
+        "publicIp": {
+          "type": "string",
+          "description": "Public IP address for this Server resource"
+        },
+        "dataCenterId": {
+          "type": "string",
+          "description": "Id of the Data center where this Server resides"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was last updated",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "BUILDING",
+            "CONFIGURING_NETWORK",
+            "DESTROYED",
+            "DESTROYING",
+            "ERROR",
+            "NEW",
+            "RESTORING",
+            "RUNNING",
+            "STARTING",
+            "STOPPED",
+            "STOPPING",
+            "VERIFYING"
+          ],
+          "description": "Status of this Server resource"
+        },
+        "backupScheduleId": {
+          "type": "string",
+          "description": "Backup schedule attached to the server"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "zoneId": {
+          "type": "string",
+          "description": "Id of the Zone where this Server resides"
+        },
+        "hostname": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9]([-\\.]{0,1}[a-zA-Z0-9]+)*$",
+          "description": "Hostname for this Server resource"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for this Server resource"
+        },
+        "sshKeyId": {
+          "type": "string",
+          "description": "Id of the SSH key associated with this server"
+        },
+        "taskState": {
+          "type": "string",
+          "enum": [
+            "",
+            "IMAGE_PENDING_UPLOAD",
+            "IMAGE_SNAPSHOT",
+            "IMAGE_UPLOADING",
+            "PENDING_IMAGE_SNAPSHOT",
+            "SCHEDULING",
+            "SPAWNING"
+          ],
+          "description": "Task status of this Server resource",
+          "notes": "This field is read-only. It changes when actions, such as snapshots, are running against the Server resource. Values often restrict other actions from starting"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Id of this Server resource"
+        }
+      }
+    },
+    "Pagination": {
+      "required": [
+        "next",
+        "prev",
+        "limit",
+        "total"
+      ],
+      "id": "Pagination",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Number of results requested",
+          "format": "int32"
+        },
+        "prev": {
+          "type": "string",
+          "description": "Link to previous page of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "Link to next page of results"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Number of results available",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}

@@ -1,0 +1,358 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/v1/countries",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "getCountries",
+          "type": "[CountrySummary]",
+          "summary": "Retrieves summary country information for the provided marketId and filters",
+          "notes": "Authorization is not required",
+          "parameters": [
+            {
+              "name": "marketId",
+              "required": true,
+              "paramType": "query",
+              "type": "string",
+              "format": "bcp-47",
+              "description": "MarketId in which the request is being made, and for which responses should be localized"
+            },
+            {
+              "name": "regionTypeId",
+              "required": false,
+              "paramType": "query",
+              "type": "integer",
+              "description": "Restrict countries to this region type; required if regionName is supplied"
+            },
+            {
+              "name": "regionName",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "description": "Restrict countries to this region name; required if regionTypeId is supplied"
+            },
+            {
+              "name": "sort",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "description": "The term to sort the result countries by.",
+              "default": "key",
+              "enum": [
+                "key",
+                "label"
+              ]
+            },
+            {
+              "name": "order",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "description": "The direction to sort the result countries by.",
+              "default": "ascending",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "[CountrySummary]"
+            },
+            {
+              "code": 422,
+              "message": "marketId is required",
+              "x-error-code": "INVALID_QUERY",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "regionTypeId is not a valid integer",
+              "x-error-code": "MALFORMED_REQUEST",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "regionName is required when regionTypeId is provided",
+              "x-error-code": "INVALID_QUERY",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "regionTypeId is required when regionName is provided",
+              "x-error-code": "INVALID_QUERY",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/countries/{countryKey}",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "getCountry",
+          "type": "Country",
+          "summary": "Retrieves country and summary state information for provided countryKey",
+          "notes": "Authorization is not required",
+          "parameters": [
+            {
+              "name": "countryKey",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "format": "iso-country-code",
+              "description": "The country key"
+            },
+            {
+              "name": "marketId",
+              "required": true,
+              "paramType": "query",
+              "type": "string",
+              "format": "bcp-47",
+              "description": "MarketId in which the request is being made, and for which responses should be localized"
+            },
+            {
+              "name": "sort",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "description": "The term to sort the result country states by.",
+              "default": "key",
+              "enum": [
+                "key",
+                "label"
+              ]
+            },
+            {
+              "name": "order",
+              "required": false,
+              "paramType": "query",
+              "type": "string",
+              "description": "The direction to sort the result country states by.",
+              "default": "ascending",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "[Country]"
+            },
+            {
+              "code": 404,
+              "message": "Country not found",
+              "x-error-code": "NOT_FOUND_COUNTRY",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "marketId is required",
+              "x-error-code": "INVALID_QUERY",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CountrySummary": {
+      "id": "CountrySummary",
+      "properties": {
+        "countryKey": {
+          "type": "string",
+          "format": "iso-country-code",
+          "description": "The ISO country-code"
+        },
+        "label": {
+          "type": "string",
+          "description": "The localized name of the country"
+        },
+        "callingCode": {
+          "type": "string",
+          "description": "The calling code prefix used for phone numbers in this country"
+        }
+      }
+    },
+    "Country": {
+      "id": "Country",
+      "properties": {
+        "countryKey": {
+          "type": "string",
+          "format": "iso-country-code",
+          "description": "The ISO country-code"
+        },
+        "label": {
+          "type": "string",
+          "description": "The localized name of the country"
+        },
+        "callingCode": {
+          "type": "string",
+          "description": "The calling code prefix used for phone numbers in this country"
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "State"
+          },
+          "description": "List of states/provinces in this country"
+        }
+      }
+    },
+    "State": {
+      "id": "State",
+      "properties": {
+        "stateKey": {
+          "type": "string",
+          "description": "The state code"
+        },
+        "label": {
+          "type": "string",
+          "description": "The localized name of the state, province, or territory"
+        }
+      }
+    },
+    "Error": {
+      "id": "Error",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        },
+        "stack": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Stack trace indicating where the error occurred.<br/>\nNOTE: This attribute <strong>MAY</strong> be included for Development and Test environments.\nHowever, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to the field within the submitted data containing an error"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "ErrorLimit": {
+      "id": "ErrorLimit",
+      "additionalProperties": false,
+      "properties": {
+        "retryAfterSec": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "Number of seconds to wait before attempting a similar request"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        },
+        "stack": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Stack trace indicating where the error occurred.<br/>\nNOTE: This attribute <strong>MAY</strong> be included for Development and Test environments.\nHowever, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems"
+        }
+      },
+      "required": [
+        "retryAfterSec",
+        "code"
+      ]
+    }
+  }
+}

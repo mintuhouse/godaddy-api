@@ -1,0 +1,325 @@
+{
+  "apiVersion": "0.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://api.godaddy.com",
+  "resourcePath": "/v1/aftermarket/listings",
+  "apis": [
+    {
+      "path": "/v1/aftermarket/listings/expiry",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "addExpiryListings",
+          "type": "AftermarketListingAction",
+          "summary": "Add expiry listings into GoDaddy Auction",
+          "parameters": [
+            {
+              "name": "expiryListings",
+              "required": true,
+              "paramType": "body",
+              "type": "array",
+              "items": {
+                "type": "AftermarketListingExpiryCreate"
+              },
+              "description": "An array of expiry listings to be loaded"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "AftermarketListingAction"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "x-error-code": "INVALID_PARAMETERS",
+              "message": "\tRequired parameters must be specified in correct format",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "x-error-code": "TOO_MANY_LISTINGS",
+              "message": "\tToo many Listings provided",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/aftermarket/listings",
+      "operations": [
+        {
+          "method": "DELETE",
+          "nickname": "deleteListings",
+          "type": "ListingAction",
+          "summary": "Remove listings from GoDaddy Auction",
+          "parameters": [
+            {
+              "name": "domains",
+              "required": true,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "A comma separated list of domain names"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "ListingAction"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "x-error-code": "INVALID_PARAMETERS",
+              "message": "\tRequired parameters must be specified in correct format",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/xml",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml",
+    "text/xml",
+    "application/javascript",
+    "text/javascript"
+  ],
+  "models": {
+    "expiry": {
+      "id": "expiry",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": []
+    },
+    "AftermarketListingExpiryCreate": {
+      "id": "AftermarketListingExpiryCreate",
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "iso-datetime",
+          "description": "Date when the domain expires"
+        },
+        "losingRegistrarId": {
+          "type": "integer",
+          "defaultValue": 1,
+          "minimum": 1,
+          "description": "Losing registrar id for the domain"
+        },
+        "pageViewsMonthly": {
+          "type": "integer",
+          "description": "Monthly traffic page view for the domain"
+        },
+        "revenueMonthly": {
+          "type": "integer",
+          "description": "Monthly parking revenue (in USD micro unit) for the domain"
+        }
+      },
+      "required": [
+        "domain",
+        "expiresAt",
+        "losingRegistrarId"
+      ]
+    },
+    "AftermarketListingAction": {
+      "id": "AftermarketListingAction",
+      "additionalProperties": false,
+      "properties": {
+        "listingActionId": {
+          "type": "integer",
+          "description": "Action Id"
+        }
+      },
+      "required": [
+        "listingActionId"
+      ]
+    },
+    "Error": {
+      "id": "Error",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "<ul>\n<li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>\n<strong style='margin-left: 12px;'>OR</strong>\n<li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>\n</ul>"
+        },
+        "pathRelated": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to a field containing an error, which is referenced by `path`"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "ErrorLimit": {
+      "id": "ErrorLimit",
+      "additionalProperties": false,
+      "properties": {
+        "retryAfterSec": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "Number of seconds to wait before attempting a similar request"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "retryAfterSec",
+        "code"
+      ]
+    }
+  }
+}

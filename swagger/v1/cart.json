@@ -1,0 +1,2441 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://api.godaddy.com",
+  "resourcePath": "/v1/cart",
+  "apis": [
+    {
+      "path": "/v1/cart",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "get",
+          "type": "Cart",
+          "summary": "Get contents of the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be retrieved, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "bcp-47",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market in which the request is happening"
+            },
+            {
+              "name": "X-Currency-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "iso-currency-code",
+              "defaultValue": "USD",
+              "description": "Currency in which pricing information should be accepted and/or returned"
+            },
+            {
+              "name": "includes",
+              "required": false,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "enum": [
+                "agreementKeys",
+                "pricing"
+              ],
+              "description": "Optional properties to be included in the response. Including errors performs Product-specific extended validation, such as TLD-based Contact, Eligibility, and Presence requirements"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "Cart"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "nickname": "delete",
+          "type": "void",
+          "summary": "Clears contents of the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be modified, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        },
+        {
+          "method": "PATCH",
+          "nickname": "update",
+          "type": "void",
+          "summary": "Applies the specified additions/changes to the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be modified, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "bcp-47",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market in which the request is happening"
+            },
+            {
+              "name": "body",
+              "required": true,
+              "paramType": "body",
+              "type": "CartUpdateBulk",
+              "description": "The modifications to make to the target Shopper's Cart"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 409,
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "`body` does not fulfill the schema",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/items/{itemId}",
+      "operations": [
+        {
+          "method": "DELETE",
+          "nickname": "deleteItem",
+          "type": "void",
+          "summary": "Removes the specified CartItem from the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be modified, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "itemId",
+              "required": true,
+              "paramType": "path",
+              "type": "integer",
+              "description": "CartItem ID to be deleted"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/items",
+      "operations": [
+        {
+          "method": "DELETE",
+          "nickname": "deleteMultipleItems",
+          "type": "void",
+          "summary": "Removes multiple specified CartItems from the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be modified, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "itemIds",
+              "required": true,
+              "paramType": "query",
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "IDs of CartItems to be deleted",
+              "minLength": 1
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/groups/{groupKey}",
+      "operations": [
+        {
+          "method": "DELETE",
+          "nickname": "deleteGroup",
+          "type": "void",
+          "summary": "Removes the specified CartGroup from the target Shopper's Cart",
+          "parameters": [
+            {
+              "name": "groupKey",
+              "required": true,
+              "paramType": "path",
+              "type": "string",
+              "description": "CartGroup key to be deleted"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/replace",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "replace",
+          "type": "void",
+          "summary": "Replace the target Shopper's Cart with source Shopper's Cart",
+          "parameters": [
+            {
+              "name": "encryptedSourceShopperId",
+              "required": true,
+              "paramType": "query",
+              "type": "string",
+              "description": "Encrypted source Shopper ID"
+            },
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be replaced by source Shopper's Cart,if it differs from authenticated"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            },
+            {
+              "code": 504,
+              "message": "Gateway timeout",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/products/{pfid}/schema",
+      "operations": [
+        {
+          "method": "GET",
+          "nickname": "productSchema",
+          "type": "JsonSchema",
+          "summary": "Retrieves the schema which must be completed in order to purchase the specified product",
+          "parameters": [
+            {
+              "name": "pfid",
+              "required": true,
+              "paramType": "path",
+              "type": "integer",
+              "description": "Product ID whose schema should be retrieved"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "JsonSchema"
+            },
+            {
+              "code": 422,
+              "message": "pfid must be a number",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "pfid not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/virtual/render",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "renderVirtual",
+          "type": "Cart",
+          "summary": "Expands listings and adds prices the supplied virtual cart",
+          "parameters": [
+            {
+              "name": "body",
+              "required": true,
+              "paramType": "body",
+              "type": "CartUpdateBulk",
+              "description": "A virtual cart to expand and price"
+            },
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID who owns this virtual cart, if it differs from authenticated"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "bcp-47",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market in which the request is happening"
+            },
+            {
+              "name": "X-Currency-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "iso-currency-code",
+              "defaultValue": "USD",
+              "description": "Currency in which pricing information should be accepted and/or returned"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Request was successful",
+              "responseModel": "Cart"
+            },
+            {},
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Based on invalid cart structure or data",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/v1/cart/validate",
+      "operations": [
+        {
+          "method": "POST",
+          "nickname": "validate",
+          "type": "void",
+          "summary": "Performs product specific validation on the item metadata in the target Shopper's Cart",
+          "notes": "Product-specific extended validation includes checks such as TLD-based Contact, Eligibility, and Presence requirements",
+          "parameters": [
+            {
+              "name": "X-Shopper-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "description": "Shopper ID whose Cart should be retrieved, if it differs from authenticated"
+            },
+            {
+              "name": "X-Market-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "string",
+              "format": "bcp-47",
+              "defaultValue": "en-US",
+              "description": "Unique identifier of the Market in which the request is happening"
+            },
+            {
+              "name": "X-Private-Label-Id",
+              "required": false,
+              "paramType": "header",
+              "type": "integer",
+              "description": "PrivateLabelId to operate as, if different from JWT"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Request was successful"
+            },
+            {
+              "code": 400,
+              "message": "Request was malformed",
+              "responseModel": "Error"
+            },
+            {
+              "code": 401,
+              "message": "Authentication info not sent or invalid",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Authenticated user is not allowed access",
+              "responseModel": "Error"
+            },
+            {
+              "code": 422,
+              "message": "Based on invalid cart structure or data",
+              "responseModel": "Error"
+            },
+            {
+              "code": 429,
+              "message": "Too many requests received within interval",
+              "responseModel": "ErrorLimit"
+            },
+            {
+              "code": 500,
+              "message": "Internal server error",
+              "responseModel": "Error"
+            }
+          ],
+          "consumes": [
+            "application/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "produces": [
+            "application/json",
+            "application/javascript",
+            "application/xml",
+            "text/javascript",
+            "text/xml"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/xml",
+    "text/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml",
+    "text/xml",
+    "application/javascript",
+    "text/javascript"
+  ],
+  "models": {
+    "Cart": {
+      "id": "Cart",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "format": "iso-currency-code",
+          "defaultValue": "USD",
+          "enum": [
+            "AED",
+            "ARS",
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CLP",
+            "CNY",
+            "COP",
+            "CZK",
+            "DKK",
+            "EGP",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "IDR",
+            "ILS",
+            "INR",
+            "JPY",
+            "KRW",
+            "MAD",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PEN",
+            "PHP",
+            "PKR",
+            "PLN",
+            "RON",
+            "RUB",
+            "SAR",
+            "SEK",
+            "SGD",
+            "THB",
+            "TRY",
+            "TWD",
+            "UAH",
+            "USD",
+            "UYU",
+            "VEF",
+            "VND",
+            "ZAR"
+          ],
+          "description": "Currency in which pricing information is returned"
+        },
+        "agreementKeys": {
+          "type": "array",
+          "items": {
+            "type": "any"
+          },
+          "description": "Unique identifiers of the legal agreements to which the end-user must consent, as returned from the /v1/agreements endpoint"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "CartItem"
+          },
+          "description": "Individual products in the cart"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "CartGroup"
+          },
+          "description": "Sets of two or more products purchased together"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "CartDomainContacts"
+          },
+          "description": "Contact information for Domains in the cart"
+        },
+        "itemSourceCode": {
+          "type": "string",
+          "description": "(ISC) A code used to track the origin or source of a customer. The presence of this code may apply a discount or indicate an affiliate referral."
+        },
+        "pricing": {
+          "$ref": "CartPricing",
+          "description": "Pricing for products in the cart - returned only when `includes=pricing`"
+        },
+        "itemSourceCodeDetail": {
+          "$ref": "CartItemSourceCodeDetail",
+          "description": "Indicates the details of the code specified in `itemSourceCode`."
+        },
+        "blockedPaymentMethods": {
+          "type": "string",
+          "description": "Payment methods that should be blocked for this cart (for example: when incompatible with a discount code). Values for this field must be passed to the 'restrictedMethod' parameter of the `GET /methods` Payment API"
+        },
+        "billTo": {
+          "$ref": "BillTo",
+          "description": "The billing contact information that will be used at the time that this cart is purchased."
+        }
+      },
+      "required": []
+    },
+    "CartItem": {
+      "id": "CartItem",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": {
+          "type": "integer",
+          "description": "The unique identifier for this item so that it may be specifically updated or deleted"
+        },
+        "pfid": {
+          "type": "integer",
+          "description": "The id representing which product will be purchased by this item"
+        },
+        "productTypeId": {
+          "type": "integer",
+          "description": "The id of the type of product that will be purchased by this item"
+        },
+        "tracking": {
+          "$ref": "CartItemTracking"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human readable description that is only visible when overridden"
+        },
+        "subscriptionId": {
+          "type": "integer",
+          "description": "Unique identifier of an existing Subscription that will be upgraded or renewed by this item"
+        },
+        "trial": {
+          "type": "boolean",
+          "description": "Whether the period between the purchase transaction and the `billOn` date is a \ntrial period or a prorated renewal to synchronize the billing date<br />NOTE: \nThis feature is only supported in the virtual cart at this time"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "integer-positive",
+          "defaultValue": 1
+        },
+        "quantityUnitLabelKey": {
+          "type": "string",
+          "description": "Key to retrieve localized quantity unit label"
+        },
+        "period": {
+          "type": "number",
+          "defaultValue": 1,
+          "minimum": "0",
+          "format": "double",
+          "description": "The amount of time that this item will be purchased for which typically determines the expiration date of the subscription after purchase"
+        },
+        "periodUnit": {
+          "type": "string",
+          "defaultValue": "MONTH",
+          "enum": [
+            "MONTH",
+            "QUARTER",
+            "SEMI_ANNUAL",
+            "YEAR",
+            "ONE_TIME"
+          ],
+          "description": "The unit of time that `period` is measured in"
+        },
+        "billOn": {
+          "type": "string",
+          "format": "iso-datetime-future",
+          "description": "Used to sync renewal billing to a specific datetime, rather than periodically from the date of purchase"
+        },
+        "coupon": {
+          "$ref": "CartItemCoupon"
+        },
+        "pricing": {
+          "$ref": "CartItemPricing",
+          "description": "Only when `includes=pricing`"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "The order in which to display this item when reassembling a single list of items and groups"
+        },
+        "discountedItemIds": {
+          "type": "array",
+          "items": {
+            "type": "any"
+          },
+          "description": "ItemIds of discounted cart items. Removal of this item will cause price changes to the items referenced here"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional product specific information that must be specified to describe what will be purchased. Must match the JSON schema returned by `GET ./cart/products/{pfid}/schema`"
+        },
+        "signature": {
+          "$ref": "TamperSignature"
+        }
+      },
+      "required": [
+        "itemId",
+        "pfid",
+        "productTypeId"
+      ]
+    },
+    "CartItemTracking": {
+      "id": "CartItemTracking",
+      "additionalProperties": false,
+      "properties": {
+        "clientIp": {
+          "type": "string",
+          "format": "ip-address",
+          "description": "IP Address of the end-user device used to add this item"
+        },
+        "itemTrackingCode": {
+          "type": "string",
+          "description": "Unique identifier of the presentation page where this request originated"
+        },
+        "pathway": {
+          "type": "string",
+          "format": "guid"
+        },
+        "affiliate": {
+          "$ref": "CartAffiliate",
+          "description": "Affiliate information in effect when the item was added"
+        }
+      },
+      "required": [
+        "clientIp"
+      ]
+    },
+    "CartAffiliate": {
+      "id": "CartAffiliate",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Three-letter affiliate code"
+        },
+        "firstTouch": {
+          "type": "string",
+          "format": "iso-date",
+          "description": "Date when a customer was referred by an affiliate"
+        }
+      },
+      "required": [
+        "type",
+        "firstTouch"
+      ]
+    },
+    "CartItemCoupon": {
+      "id": "CartItemCoupon",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The coupon code to redeem for this item"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "OFFICE_MAX"
+          ],
+          "description": "Indicates the type of coupon code to prevent collision from codes generated by multiple partners"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "CartItemPricing": {
+      "id": "CartItemPricing",
+      "additionalProperties": false,
+      "properties": {
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price with any discounts and without taxes or fees for given `quantity` and `period`"
+        },
+        "list": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "List price for given `quantity` and `period`"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Savings off of list price for given `quantity` and `period` <pre>`savings` = `list` - `subtotal`</pre>"
+        },
+        "sale": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sale price for given `quantity` and `period`"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Discount off of sale price for given `quantity` and `period` <pre>`discount` = `sale` - `subtotal`</pre>"
+        },
+        "taxes": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Taxes for given `quantity` and `period`"
+        },
+        "fees": {
+          "$ref": "CartFee",
+          "description": "Fees for given `quantity` and `period`"
+        },
+        "unit": {
+          "$ref": "CartItemUnitPricing",
+          "description": "Pricing for a single unit of the given item"
+        },
+        "renewal": {
+          "$ref": "CartItemPricingRenewal",
+          "description": "Pricing for the renewal of the given item <br />\nNote: This will currently only be returned for free trial items <br />\nTODO: Revise this note after completing in-app purchase"
+        }
+      },
+      "required": [
+        "subtotal",
+        "list",
+        "savings",
+        "sale",
+        "discount",
+        "fees",
+        "unit",
+        "taxes"
+      ]
+    },
+    "CartFee": {
+      "id": "CartFee",
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of all fees"
+        },
+        "icann": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "ICANN Fees for any domain registrations"
+        }
+      },
+      "required": [
+        "total",
+        "icann"
+      ]
+    },
+    "CartItemUnitPricing": {
+      "id": "CartItemUnitPricing",
+      "additionalProperties": false,
+      "properties": {
+        "list": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "List price without consideration of `quantity` and `period`"
+        },
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price with any discounts and without taxes or fees without consideration of `quantity` and `period`"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Savings off of list price without consideration of `quantity` and `period` <pre>`savings` = `list` - `subtotal`</pre>"
+        },
+        "sale": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sale price without consideration of `quantity` and `period`"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Discount off of sale price without consideration of `quantity` and `period` <pre>`discount` = `sale` - `subtotal`</pre>"
+        },
+        "taxes": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Taxes without consideration of `quantity` and `period`"
+        },
+        "fees": {
+          "$ref": "CartFee",
+          "description": "Fees without consideration of `quantity` and `period`"
+        },
+        "ranges": {
+          "type": "array",
+          "items": {
+            "$ref": "CartItemUnitPricingRange"
+          },
+          "description": "Discounted price for each discounted period or quantity on a multi-period or quantity item. Omitted when `periodCount` or `quantity` is equal to 1"
+        }
+      },
+      "required": [
+        "list",
+        "subtotal",
+        "savings",
+        "sale",
+        "discount",
+        "fees",
+        "taxes"
+      ]
+    },
+    "CartItemUnitPricingRange": {
+      "id": "CartItemUnitPricingRange",
+      "additionalProperties": false,
+      "properties": {
+        "periodMin": {
+          "type": "integer",
+          "description": "Starting period of the discounted price (inclusive)"
+        },
+        "periodMax": {
+          "type": "integer",
+          "description": "Ending period of the discounted price (inclusive). Optional when `subtotal` can be applied to remaining periods"
+        },
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Discounted price without taxes or fees"
+        }
+      },
+      "required": [
+        "periodMin",
+        "subtotal"
+      ]
+    },
+    "CartItemPricingRenewal": {
+      "id": "CartItemPricingRenewal",
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price the customer will pay at the time of renewal <pre>`total` = `subtotal` + `taxes` + `fees.total`</pre>"
+        },
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price with any discounts and without taxes or fees for given `quantity` and `period`"
+        },
+        "list": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "List price for given `quantity` and `period`"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Savings off of list price for given `quantity` and `period` <pre>`savings` = `list` - `subtotal`</pre>"
+        },
+        "sale": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sale price for given `quantity` and `period`"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Discount off of sale price for given `quantity` and `period` <pre>`discount` = `sale` - `subtotal`</pre>"
+        },
+        "fees": {
+          "$ref": "CartFee",
+          "type": "object",
+          "description": "Fees for given `quantity` and `period`"
+        },
+        "taxes": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Taxes for given `quantity` and `period`"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "total",
+        "subtotal",
+        "list",
+        "savings",
+        "sale",
+        "discount",
+        "fees",
+        "taxes"
+      ]
+    },
+    "TamperSignature": {
+      "id": "TamperSignature",
+      "additionalProperties": false,
+      "properties": {
+        "hash": {
+          "type": "string",
+          "description": "A hash of this item used to verify that restricted properties have not been modified"
+        },
+        "content": {
+          "type": "string",
+          "description": "Additional information that is included in the signature hash"
+        }
+      },
+      "required": [
+        "hash"
+      ]
+    },
+    "CartGroup": {
+      "id": "CartGroup",
+      "additionalProperties": false,
+      "properties": {
+        "groupKey": {
+          "type": "string",
+          "description": "The primary key identifying a group"
+        },
+        "pricing": {
+          "$ref": "CartGroupPricing",
+          "description": "Only when `includes=pricing`"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "The order in which to display this item when reassembling a single list of items and groups"
+        },
+        "items": {
+          "type": "array",
+          "minLength": 1,
+          "items": {
+            "$ref": "CartGroupItem"
+          }
+        }
+      },
+      "required": [
+        "groupKey",
+        "items"
+      ]
+    },
+    "CartGroupPricing": {
+      "id": "CartGroupPricing",
+      "additionalProperties": false,
+      "properties": {
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of subtotal prices for all items in the group"
+        },
+        "list": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of list prices for all items in the group"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of savings for all items in the group"
+        },
+        "sale": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of sale prices for all items in the group"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of discounts for all items in the group"
+        },
+        "fees": {
+          "$ref": "CartFee",
+          "description": "Sum of fees for all items in the group"
+        }
+      },
+      "required": [
+        "subtotal",
+        "list",
+        "savings",
+        "sale",
+        "discount",
+        "fees"
+      ]
+    },
+    "CartGroupItem": {
+      "id": "CartGroupItem",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": {
+          "type": "integer",
+          "description": "The unique identifier for this item so that it may be specifically updated or deleted"
+        },
+        "pfid": {
+          "type": "integer",
+          "description": "The id representing which product will be purchased by this item"
+        },
+        "productTypeId": {
+          "type": "integer",
+          "description": "The id of the type of product that will be purchased by this item"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human readable description that is only visible when overridden"
+        },
+        "canRemoveAlone": {
+          "type": "boolean",
+          "description": "Indicates whether an item can be removed without cascading to the whole group"
+        },
+        "subscriptionId": {
+          "type": "integer",
+          "description": "Unique identifier of an existing Subscription that will be upgraded or renewed by this item"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "integer-positive",
+          "defaultValue": 1
+        },
+        "quantityUnitLabelKey": {
+          "type": "string",
+          "description": "Key to retrieve localized quantity unit label"
+        },
+        "period": {
+          "type": "number",
+          "defaultValue": 1,
+          "minimum": "0",
+          "format": "double",
+          "description": "The amount of time that this item will be purchased for which typically determines the expiration date of the subscription after purchase"
+        },
+        "periodUnit": {
+          "type": "string",
+          "defaultValue": "MONTH",
+          "enum": [
+            "MONTH",
+            "QUARTER",
+            "SEMI_ANNUAL",
+            "YEAR",
+            "ONE_TIME"
+          ],
+          "description": "The unit of time that `period` is measured in"
+        },
+        "billOn": {
+          "type": "string",
+          "format": "iso-date-future",
+          "description": "Used to sync renewal billing to a specific date, rather than periodically from the date of purchase"
+        },
+        "tracking": {
+          "$ref": "CartItemTracking"
+        },
+        "coupon": {
+          "$ref": "CartItemCoupon"
+        },
+        "pricing": {
+          "$ref": "CartItemPricing",
+          "description": "Only when `includes=pricing`"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "The order in which to display this item when reassembling a single list of items and groups"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional product specific information that must be specified to describe what will be purchased. Must match the JSON schema returned by `GET ./cart/products/{pfid}/schema`"
+        },
+        "signature": {
+          "$ref": "TamperSignature"
+        }
+      },
+      "required": [
+        "itemId",
+        "pfid",
+        "productTypeId"
+      ]
+    },
+    "CartDomainContacts": {
+      "id": "CartDomainContacts",
+      "additionalProperties": false,
+      "properties": {
+        "contactKey": {
+          "type": "string",
+          "description": "The key used to reference this contact in the domain metadata"
+        },
+        "registrant": {
+          "$ref": "Contact"
+        },
+        "admin": {
+          "$ref": "Contact"
+        },
+        "tech": {
+          "$ref": "Contact"
+        },
+        "billing": {
+          "$ref": "Contact"
+        },
+        "presence": {
+          "$ref": "Contact",
+          "type": "object"
+        }
+      },
+      "required": [
+        "contactKey"
+      ]
+    },
+    "Contact": {
+      "id": "Contact",
+      "additionalProperties": false,
+      "properties": {
+        "nameFirst": {
+          "type": "string",
+          "format": "person-name",
+          "maxLength": 30
+        },
+        "nameMiddle": {
+          "type": "string"
+        },
+        "nameLast": {
+          "type": "string",
+          "format": "person-name",
+          "maxLength": 30
+        },
+        "organization": {
+          "type": "string",
+          "format": "organization-name",
+          "maxLength": 100
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 80
+        },
+        "phone": {
+          "type": "string",
+          "format": "phone",
+          "maxLength": 17
+        },
+        "fax": {
+          "type": "string",
+          "format": "phone",
+          "maxLength": 17
+        },
+        "addressMailing": {
+          "$ref": "Address"
+        }
+      },
+      "required": [
+        "nameFirst",
+        "nameLast",
+        "email",
+        "phone",
+        "addressMailing"
+      ]
+    },
+    "Address": {
+      "id": "Address",
+      "additionalProperties": false,
+      "properties": {
+        "address1": {
+          "type": "string",
+          "format": "street-address",
+          "maxLength": 41
+        },
+        "address2": {
+          "type": "string",
+          "format": "street-address2",
+          "maxLength": 41
+        },
+        "city": {
+          "type": "string",
+          "format": "city-name",
+          "maxLength": 30
+        },
+        "state": {
+          "type": "string",
+          "format": "state-province-territory",
+          "minLength": 2,
+          "maxLength": 30,
+          "description": "State or province or territory"
+        },
+        "postalCode": {
+          "type": "string",
+          "format": "postal-code",
+          "minLength": 2,
+          "maxLength": 10,
+          "description": "Postal or zip code"
+        },
+        "country": {
+          "type": "string",
+          "format": "iso-country-code",
+          "defaultValue": "US",
+          "enum": [
+            "AC",
+            "AD",
+            "AE",
+            "AF",
+            "AG",
+            "AI",
+            "AL",
+            "AM",
+            "AO",
+            "AQ",
+            "AR",
+            "AS",
+            "AT",
+            "AU",
+            "AW",
+            "AX",
+            "AZ",
+            "BA",
+            "BB",
+            "BD",
+            "BE",
+            "BF",
+            "BG",
+            "BH",
+            "BI",
+            "BJ",
+            "BM",
+            "BN",
+            "BO",
+            "BQ",
+            "BR",
+            "BS",
+            "BT",
+            "BV",
+            "BW",
+            "BY",
+            "BZ",
+            "CA",
+            "CC",
+            "CD",
+            "CF",
+            "CG",
+            "CH",
+            "CI",
+            "CK",
+            "CL",
+            "CM",
+            "CN",
+            "CO",
+            "CR",
+            "CV",
+            "CW",
+            "CX",
+            "CY",
+            "CZ",
+            "DE",
+            "DJ",
+            "DK",
+            "DM",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "EH",
+            "ER",
+            "ES",
+            "ET",
+            "FI",
+            "FJ",
+            "FK",
+            "FM",
+            "FO",
+            "FR",
+            "GA",
+            "GB",
+            "GD",
+            "GE",
+            "GF",
+            "GG",
+            "GH",
+            "GI",
+            "GL",
+            "GM",
+            "GN",
+            "GP",
+            "GQ",
+            "GR",
+            "GS",
+            "GT",
+            "GU",
+            "GW",
+            "GY",
+            "HK",
+            "HM",
+            "HN",
+            "HR",
+            "HT",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IM",
+            "IN",
+            "IO",
+            "IQ",
+            "IS",
+            "IT",
+            "JE",
+            "JM",
+            "JO",
+            "JP",
+            "KE",
+            "KG",
+            "KH",
+            "KI",
+            "KM",
+            "KN",
+            "KR",
+            "KV",
+            "KW",
+            "KY",
+            "KZ",
+            "LA",
+            "LB",
+            "LC",
+            "LI",
+            "LK",
+            "LR",
+            "LS",
+            "LT",
+            "LU",
+            "LV",
+            "LY",
+            "MA",
+            "MC",
+            "MD",
+            "ME",
+            "MG",
+            "MH",
+            "MK",
+            "ML",
+            "MM",
+            "MN",
+            "MO",
+            "MP",
+            "MQ",
+            "MR",
+            "MS",
+            "MT",
+            "MU",
+            "MV",
+            "MW",
+            "MX",
+            "MY",
+            "MZ",
+            "NA",
+            "NC",
+            "NE",
+            "NF",
+            "NG",
+            "NI",
+            "NL",
+            "NO",
+            "NP",
+            "NR",
+            "NU",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PF",
+            "PG",
+            "PH",
+            "PK",
+            "PL",
+            "PM",
+            "PN",
+            "PR",
+            "PS",
+            "PT",
+            "PW",
+            "PY",
+            "QA",
+            "RE",
+            "RO",
+            "RS",
+            "RU",
+            "RW",
+            "SA",
+            "SB",
+            "SC",
+            "SE",
+            "SG",
+            "SH",
+            "SI",
+            "SJ",
+            "SK",
+            "SL",
+            "SM",
+            "SN",
+            "SO",
+            "SR",
+            "ST",
+            "SV",
+            "SX",
+            "SZ",
+            "TC",
+            "TD",
+            "TF",
+            "TG",
+            "TH",
+            "TJ",
+            "TK",
+            "TL",
+            "TM",
+            "TN",
+            "TO",
+            "TP",
+            "TR",
+            "TT",
+            "TV",
+            "TW",
+            "TZ",
+            "UA",
+            "UG",
+            "UM",
+            "US",
+            "UY",
+            "UZ",
+            "VA",
+            "VC",
+            "VE",
+            "VG",
+            "VI",
+            "VN",
+            "VU",
+            "WF",
+            "WS",
+            "YE",
+            "YT",
+            "ZA",
+            "ZM",
+            "ZW"
+          ],
+          "description": "Two-letter ISO country code to be used as a hint for target region<br/><br/>\nNOTE: These are sample values, there are many\n<a href='http://www.iso.org/iso/country_codes.htm'>more</a>"
+        }
+      },
+      "required": [
+        "address1",
+        "city",
+        "state",
+        "postalCode",
+        "country"
+      ]
+    },
+    "CartPricing": {
+      "id": "CartPricing",
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price the customer pays <pre>`total` = `subtotal` + `taxes` + `fees.total`</pre>"
+        },
+        "subtotal": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Price with `discount` and without taxes or fees"
+        },
+        "list": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Sum of list prices for the entire cart"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Savings off of list price <pre>`savings` = `list` - `subtotal`</pre>"
+        },
+        "discount": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Discount from promotional pricing"
+        },
+        "taxes": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Taxes for the entire cart"
+        },
+        "fees": {
+          "$ref": "CartFee",
+          "description": "Fees for the entire cart"
+        }
+      },
+      "required": [
+        "total",
+        "subtotal",
+        "list",
+        "savings",
+        "discount",
+        "taxes",
+        "fees"
+      ]
+    },
+    "CartItemSourceCodeDetail": {
+      "id": "CartItemSourceCodeDetail",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "APPLIED",
+            "APPLIED_BEST_OFFER",
+            "EXPIRED",
+            "INACTIVE",
+            "INELIGIBLE",
+            "INVALID",
+            "LIMIT_MET",
+            "MINIMUM_NOT_MET",
+            "PRE_ACTIVE"
+          ],
+          "description": "Indicates the state of the promotion code specified in `itemSourceCode`."
+        },
+        "spendMin": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Minimum spend amount required to apply the promotional savings"
+        },
+        "spendDelta": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Additional spend amount required to apply the promotional savings"
+        },
+        "savings": {
+          "type": "integer",
+          "format": "currency-micro-unit-positive",
+          "description": "Possible savings when `spendMinimum` is met for fixed amount promotions"
+        },
+        "savingsPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "Possible savings percentage when `spendMinimum` is met for percentage promotions"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "BillTo": {
+      "id": "BillTo",
+      "additionalProperties": false,
+      "properties": {
+        "taxId": {
+          "type": "string",
+          "description": "Value Added Tax ID used for calculating the tax the customer is required to pay"
+        },
+        "contact": {
+          "$ref": "Contact"
+        }
+      },
+      "required": [
+        "contact"
+      ]
+    },
+    "Error": {
+      "id": "Error",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorField": {
+      "id": "ErrorField",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "<ul>\n<li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>\n<strong style='margin-left: 12px;'>OR</strong>\n<li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>\n</ul>"
+        },
+        "pathRelated": {
+          "type": "string",
+          "format": "json-path",
+          "pattern": "^[a-z_]([a-zA-Z0-9_.]*)*$",
+          "description": "JSONPath referring to a field containing an error, which is referenced by `path`"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the problem with the contents of the field"
+        }
+      },
+      "required": [
+        "path",
+        "code"
+      ]
+    },
+    "ErrorLimit": {
+      "id": "ErrorLimit",
+      "additionalProperties": false,
+      "properties": {
+        "retryAfterSec": {
+          "type": "integer",
+          "format": "integer-positive",
+          "description": "Number of seconds to wait before attempting a similar request"
+        },
+        "code": {
+          "type": "string",
+          "format": "constant",
+          "pattern": "^[A-Z_][A-Z0-9_]*$",
+          "description": "Short identifier for the error, suitable for indicating the specific error within client code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable, English description of the error"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "ErrorField"
+          },
+          "description": "List of the specific fields, and the errors found with their contents"
+        }
+      },
+      "required": [
+        "retryAfterSec",
+        "code"
+      ]
+    },
+    "JsonSchema": {
+      "id": "JsonSchema",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "items": {
+            "$ref": "JsonProperty"
+          }
+        },
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "models": {
+          "type": "object",
+          "items": {
+            "$ref": " JsonSchema"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "properties",
+        "required",
+        "models"
+      ]
+    },
+    "JsonProperty": {
+      "id": "JsonProperty",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "$ref": {
+          "type": "string"
+        },
+        "items": {
+          "type": "object",
+          "items": {
+            "$ref": "JsonDataType"
+          }
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "maxItems": {
+          "type": "integer"
+        },
+        "minItems": {
+          "type": "integer"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "maximum": {
+          "type": "integer"
+        },
+        "minimum": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "$ref",
+        "required"
+      ]
+    },
+    "JsonDataType": {
+      "id": "JsonDataType",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "$ref": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "$ref"
+      ]
+    },
+    "CartUpdateBulk": {
+      "id": "CartUpdateBulk",
+      "additionalProperties": false,
+      "properties": {
+        "listings": {
+          "type": "array",
+          "items": {
+            "$ref": "CartListingAdd"
+          },
+          "description": "The set of listing ids to add to the cart. The listing will be expanded into one or more items in the cart"
+        },
+        "items": {
+          "type": "array",
+          "minLength": 1,
+          "items": {
+            "$ref": "CartItemUpdateBulk"
+          },
+          "description": "Cart items to add or update"
+        },
+        "groups": {
+          "type": "array",
+          "minLength": 1,
+          "items": {
+            "$ref": "CartGroupUpdateBulk"
+          },
+          "description": "Cart items to add or update"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "CartDomainContacts"
+          }
+        },
+        "tracking": {
+          "$ref": "CartItemTracking"
+        },
+        "itemSourceCode": {
+          "type": "string",
+          "description": "(ISC) A code used to track the origin or source of a customer. The presence of this code may apply a discount or indicate an affiliate referral."
+        },
+        "billTo": {
+          "$ref": "BillToUpdate",
+          "description": "The billing contact information that will be used at the time that this cart is purchased."
+        }
+      },
+      "required": []
+    },
+    "CartListingAdd": {
+      "id": "CartListingAdd",
+      "additionalProperties": false,
+      "properties": {
+        "listingId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Must be specified to add a new listing"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "integer-positive",
+          "defaultValue": 1
+        },
+        "periodCount": {
+          "type": "number",
+          "defaultValue": 1,
+          "format": "double",
+          "description": "The number of natural product periods that will be purchased by this item. Each pfid has its own natural period, for example: A 2-year domain pfid's natural period is 2 years."
+        },
+        "billOn": {
+          "type": "string",
+          "format": "iso-date-future",
+          "description": "Used to sync renewal billing to a specific date, rather than periodically from the date of purchase"
+        },
+        "coupon": {
+          "$ref": "CartItemCoupon"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional product specific information that must be specified to describe what will be purchased. Must match the JSON schema returned by `GET ./cart/products/{pfid}/schema`"
+        }
+      },
+      "required": [
+        "listingId"
+      ]
+    },
+    "CartItemUpdateBulk": {
+      "id": "CartItemUpdateBulk",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": {
+          "type": "integer",
+          "description": "Must be specified to update an existing CartItem"
+        },
+        "pfid": {
+          "type": "integer",
+          "description": "Must be specified to add a new CartItem"
+        },
+        "subscriptionId": {
+          "type": "integer",
+          "description": "Unique identifier of an existing Subscription that will be upgraded or renewed by this item"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "integer-positive",
+          "defaultValue": 1
+        },
+        "periodCount": {
+          "type": "number",
+          "defaultValue": 1,
+          "minimum": "0",
+          "format": "double",
+          "description": "The number of natural product periods that will be purchased by this item. Each pfid has its own natural period, for example: A 2-year domain pfid's natural period is 2 years."
+        },
+        "billOn": {
+          "type": "string",
+          "format": "iso-date-future",
+          "description": "Used to sync renewal billing to a specific date, rather than periodically from the date of purchase"
+        },
+        "coupon": {
+          "$ref": "CartItemCoupon"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional product specific information that must be specified to describe what will be purchased. Must match the JSON schema returned by `GET ./cart/products/{pfid}/schema`"
+        },
+        "signature": {
+          "$ref": "TamperSignature"
+        }
+      },
+      "required": []
+    },
+    "CartGroupUpdateBulk": {
+      "id": "CartGroupUpdateBulk",
+      "additionalProperties": false,
+      "properties": {
+        "groupKey": {
+          "type": "string",
+          "description": "The primary key identifying a group"
+        },
+        "items": {
+          "type": "array",
+          "minLength": 1,
+          "items": {
+            "$ref": "CartItemUpdateBulk"
+          }
+        }
+      },
+      "required": []
+    },
+    "BillToUpdate": {
+      "id": "BillToUpdate",
+      "additionalProperties": false,
+      "properties": {
+        "taxId": {
+          "type": "string",
+          "description": "VAT Tax ID used for calculating the tax the customer is required to pay"
+        },
+        "contact": {
+          "$ref": "ContactUpdate"
+        }
+      },
+      "required": []
+    },
+    "ContactUpdate": {
+      "id": "ContactUpdate",
+      "additionalProperties": false,
+      "properties": {
+        "nameFirst": {
+          "type": "string",
+          "format": "person-name",
+          "maxLength": 30
+        },
+        "nameMiddle": {
+          "type": "string"
+        },
+        "nameLast": {
+          "type": "string",
+          "format": "person-name",
+          "maxLength": 30
+        },
+        "organization": {
+          "type": "string",
+          "format": "organization-name",
+          "maxLength": 100
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 80
+        },
+        "phone": {
+          "type": "string",
+          "format": "phone",
+          "maxLength": 17
+        },
+        "fax": {
+          "type": "string",
+          "format": "phone",
+          "maxLength": 17
+        },
+        "addressMailing": {
+          "$ref": "Address"
+        }
+      },
+      "required": [
+        "nameFirst"
+      ]
+    }
+  }
+}

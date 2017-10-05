@@ -1,0 +1,403 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "apiVersion": "1.0",
+  "authorizations": {},
+  "resourcePath": "/v1/cloud/applications",
+  "apis": [
+    {
+      "operations": [
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "CloudApplication"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Application not found",
+              "code": 404,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": true,
+              "type": "string",
+              "name": "applicationId",
+              "paramType": "path",
+              "description": "Id of application to be fetched"
+            }
+          ],
+          "type": "CloudApplication",
+          "summary": "Find application by applicationId",
+          "nickname": "getApplicationById",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/applications/{applicationId}"
+    },
+    {
+      "operations": [
+        {
+          "responseMessages": [
+            {
+              "message": "Application created",
+              "code": 202,
+              "responseModel": "CloudApplication"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Authenticated user is not allowed access",
+              "code": 403,
+              "responseModel": "Error"
+            },
+            {
+              "message": "Missing or invalid field value in request",
+              "code": 422,
+              "responseModel": "Error"
+            }
+          ],
+          "authorizations": {},
+          "type": "CloudApplication",
+          "parameters": [
+            {
+              "required": true,
+              "type": "CloudApplicationCreate",
+              "name": "body",
+              "paramType": "body",
+              "description": "Application details"
+            }
+          ],
+          "notes": "Use to add a new application",
+          "summary": "Create a new application",
+          "nickname": "addApplication",
+          "method": "POST"
+        },
+        {
+          "authorizations": {},
+          "responseMessages": [
+            {
+              "message": "Request was successful",
+              "code": 200,
+              "responseModel": "CloudApplicationList"
+            },
+            {
+              "message": "Credentials must be specified",
+              "code": 401,
+              "responseModel": "Error"
+            }
+          ],
+          "parameters": [
+            {
+              "required": false,
+              "type": "string",
+              "name": "category",
+              "paramType": "query",
+              "description": "Application category filter (exact match)"
+            },
+            {
+              "required": false,
+              "type": "string",
+              "name": "imageId",
+              "paramType": "query",
+              "description": "Lookup application by associated published image"
+            },
+            {
+              "required": false,
+              "name": "status",
+              "paramType": "query",
+              "description": "Application status filter (exact match)",
+              "type": "string",
+              "enum": [
+                "DEPRECATED",
+                "LIVE",
+                "SAVING"
+              ]
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "limit",
+              "paramType": "query",
+              "description": "Number of results to display"
+            },
+            {
+              "required": false,
+              "type": "integer",
+              "name": "offset",
+              "paramType": "query",
+              "description": "The starting position of the query"
+            }
+          ],
+          "type": "CloudApplicationList",
+          "summary": "Get a list of applications",
+          "nickname": "getApplicationList",
+          "method": "GET"
+        }
+      ],
+      "path": "/v1/cloud/applications"
+    }
+  ],
+  "swaggerVersion": "1.2",
+  "models": {
+    "CloudApplication": {
+      "required": [
+        "applicationId",
+        "name",
+        "description",
+        "categories",
+        "links",
+        "inputs",
+        "status",
+        "version",
+        "changelogUrl",
+        "ports",
+        "minimumRamMb",
+        "createdAt",
+        "modifiedAt",
+        "imageIds"
+      ],
+      "id": "CloudApplication",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this Application"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "DateTime the record was created",
+          "format": "date-time"
+        },
+        "minimumRamMb": {
+          "type": "integer",
+          "description": "Required memory in MB for this Application",
+          "format": "int64"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplicationLink"
+          },
+          "description": "Urls for more information about this Application"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DEPRECATED",
+            "LIVE",
+            "SAVING"
+          ],
+          "description": "Status of this Application"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplicationInputField"
+          },
+          "description": "User inputs collected for this Application"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Id of this Application"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this Application"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "description": "DateTime the record was modified",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this Application"
+        },
+        "changelogUrl": {
+          "type": "string",
+          "description": "Changelog of this Application"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of categories for this Application"
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of open ports for this Application"
+        },
+        "imageIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ids of the published images associated with this Application"
+        }
+      }
+    },
+    "CloudApplicationLink": {
+      "required": [
+        "name",
+        "url"
+      ],
+      "id": "CloudApplicationLink",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "CloudApplicationInputFieldValidator": {
+      "required": [
+        "type",
+        "regex"
+      ],
+      "id": "CloudApplicationInputFieldValidator",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "DOES_NOT_MATCH",
+            "MATCH"
+          ]
+        },
+        "regex": {
+          "type": "string"
+        }
+      }
+    },
+    "CloudApplicationList": {
+      "required": [
+        "results",
+        "pagination"
+      ],
+      "id": "CloudApplicationList",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplication"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination"
+        }
+      }
+    },
+    "CloudApplicationInputField": {
+      "required": [
+        "name",
+        "type",
+        "validators"
+      ],
+      "id": "CloudApplicationInputField",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PASSWORD",
+            "READONLY",
+            "STRING"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "default": {
+          "type": "string"
+        },
+        "validators": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplicationInputFieldValidator"
+          }
+        }
+      }
+    },
+    "CloudApplicationCreate": {
+      "required": [
+        "name",
+        "description",
+        "categories",
+        "inputs",
+        "version"
+      ],
+      "id": "CloudApplicationCreate",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of open ports for this Application"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this Application"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this Application"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this Application"
+        },
+        "minimumRamMb": {
+          "type": "integer",
+          "description": "Required memory in MB for this Application",
+          "format": "int64"
+        },
+        "changelogUrl": {
+          "type": "string",
+          "description": "Changelog of this Application"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of categories for this Application"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplicationInputField"
+          },
+          "description": "Validation rules for this Application"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "CloudApplicationLink"
+          },
+          "description": "Urls for more information about this Application"
+        }
+      }
+    }
+  },
+  "basePath": "https://api.godaddy.com",
+  "consumes": [
+    "application/json"
+  ]
+}
