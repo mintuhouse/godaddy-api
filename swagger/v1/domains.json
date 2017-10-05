@@ -2835,7 +2835,7 @@
               "name": "records",
               "required": true,
               "paramType": "body",
-              "type": "[DNSRecord]",
+              "type": "array",
               "description": "DNS Records to add to whatever currently exists"
             }
           ],
