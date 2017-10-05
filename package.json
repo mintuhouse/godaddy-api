@@ -1,6 +1,6 @@
 {
   "name": "godaddy-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GoDaddy API generated from https://developer.godaddy.com/doc",
   "main": "./index.js",
   "scripts": {
@@ -28,7 +28,9 @@
     "supertest": "^3.0.0",
     "swagger-js-codegen": "^1.10.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "request": "^2.83.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mintuhouse/godaddy-api.git"
