@@ -49,22 +49,25 @@ const downloadSwagger = async() => {
 
       // Modify the default values
       json.basePath = 'https://api.godaddy.com';
+      const authorizations = {
+        sso_key: {
+          type: 'apiKey',
+          name: 'Authorization',
+          in: 'header'
+        }
+      };
       json.apis.map((api) => {
         api.operations.map((operation) => {
-          var parameters = operation.parameters;
-          parameters.unshift({
-            "name": "Authorization",
-            "required": true,
-            "paramType": "header",
-            "type": "string",
-            "description": "Authorization header value in format 'sso-key <key>:<secret>'"
-          })
+          operation.authorizations = {
+            'sso_key': []
+          };
         })
       });
+      json.authorizations = authorizations;
 
       ensureDirectoryExistence(dest);
       fs.writeFileSync(dest, JSON.stringify(json, null, 2));
-      console.log("Generated " + dest);
+      console.log('Generated ' + dest);
 
       var unversionedPath = path.slice('4');
       if (unversionedPath.indexOf('/') == -1) {
@@ -75,7 +78,18 @@ const downloadSwagger = async() => {
       }
       codegen.push({
         swagger: dest,
-        className: className
+        className: className,
+        mustache: {
+          isNode: true,
+          isSecure: true,
+          isSecureApiKey: true,
+        },
+        template: {
+          class: 'templates/swagger-js-codegen/node-class.mustache',
+          method: 'templates/swagger-js-codegen/method.mustache',
+          request: 'templates/swagger-js-codegen/node-request.mustache'
+        },
+        custom: true
       });
       ensureDirectoryExistence('lib/' + className + '.js');
     }));
@@ -85,7 +99,9 @@ const downloadSwagger = async() => {
       if (c1.className > c2.className) return 1;
       return 0;
     });
-    fs.writeFileSync('swagger/gruntfile.json', JSON.stringify(codegen, null, 2));
+    fs.writeFileSync('swagger/gruntfile.json', JSON.stringify({
+      apis: codegen
+    }, null, 2));
   } catch (e) {
     console.log(e);
     throw new Error();

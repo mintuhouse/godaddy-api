@@ -10,23 +10,22 @@ module.exports = function(grunt) {
       }
     },
     'swagger-js-codegen': {
-      options: {
-        apis: grunt.file.readJSON('swagger/gruntfile.json'),
-        dest: 'lib'
-      },
-      dist: {}
+       queries: {
+        options: {
+          apis: grunt.file.readJSON('swagger/gruntfile.json').apis,
+          dest: 'lib'
+        },
+        dist: {}
+      }
     },
     jsonlint: {
       all: {
         src: ['package.json', 'swagger/*.json', '.jshintrc']
       }
     },
-    'run': {
-      your_target: {
-        cmd: 'node',
-        args: [
-          'download-swagger.js'
-        ]
+    run: {
+      commands: {
+        exec: 'npm run-script download-swagger && npm run-script build'
       }
     }
   });

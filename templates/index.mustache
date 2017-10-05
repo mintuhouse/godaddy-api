@@ -1,0 +1,22 @@
+var GoDaddy = function(api_key, api_secret) {
+  'use strict';
+  var Authorization = `sso-key ${api_key}:${api_secret}`;
+  var domainOrOptions = {
+    token: {
+      value: Authorization,
+      headerOrQueryName: 'Authorization'
+    }
+  }
+
+  {{#apis}}
+  var {{className}} = require('./lib/{{className}}').{{className}};
+  {{/apis}}
+
+  return  {
+    {{#apis}}
+    {{className}}: new {{className}}(domainOrOptions),
+    {{/apis}}
+  }
+}
+
+module.exports = exports = GoDaddy;
