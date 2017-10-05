@@ -14,6 +14,13 @@
           "summary": "Get contents of the target Shopper's Cart",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -117,6 +124,13 @@
           "summary": "Clears contents of the target Shopper's Cart",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -191,6 +205,13 @@
           "type": "void",
           "summary": "Applies the specified additions/changes to the target Shopper's Cart",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -292,6 +313,13 @@
           "summary": "Removes the specified CartItem from the target Shopper's Cart",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -378,6 +406,13 @@
           "type": "void",
           "summary": "Removes multiple specified CartItems from the target Shopper's Cart",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -470,6 +505,13 @@
           "summary": "Removes the specified CartGroup from the target Shopper's Cart",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "groupKey",
               "required": true,
               "paramType": "path",
@@ -549,6 +591,13 @@
           "type": "void",
           "summary": "Replace the target Shopper's Cart with source Shopper's Cart",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "encryptedSourceShopperId",
               "required": true,
@@ -630,6 +679,13 @@
           "summary": "Retrieves the schema which must be completed in order to purchase the specified product",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "pfid",
               "required": true,
               "paramType": "path",
@@ -690,6 +746,13 @@
           "type": "Cart",
           "summary": "Expands listings and adds prices the supplied virtual cart",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "body",
               "required": true,
@@ -793,6 +856,13 @@
           "summary": "Performs product specific validation on the item metadata in the target Shopper's Cart",
           "notes": "Product-specific extended validation includes checks such as TLD-based Contact, Eligibility, and Presence requirements",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "X-Shopper-Id",
               "required": false,

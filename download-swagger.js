@@ -41,12 +41,27 @@ const downloadSwagger = async() => {
     var codegen = []
     const swagger = await getJSON(godaddySwaggerFile);
 
-    await Promise.all(swagger.apis.map(async (resource) => {
+    await Promise.all(swagger.apis.map(async(resource) => {
       var path = resource.path;
       var url = godaddySwaggerFile + path;
       var dest = 'swagger' + path + '.json';
       var json = await getJSON(url);
-      json['basePath'] = 'https://api.godaddy.com';
+
+      // Modify the default values
+      json.basePath = 'https://api.godaddy.com';
+      json.apis.map((api) => {
+        api.operations.map((operation) => {
+          var parameters = operation.parameters;
+          parameters.unshift({
+            "name": "Authorization",
+            "required": true,
+            "paramType": "header",
+            "type": "string",
+            "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+          })
+        })
+      });
+
       ensureDirectoryExistence(dest);
       fs.writeFileSync(dest, JSON.stringify(json, null, 2));
       console.log("Generated " + dest);

@@ -14,6 +14,13 @@
           "summary": "Update details for the specified Shopper",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "shopperId",
               "required": true,
               "paramType": "path",
@@ -90,6 +97,13 @@
           "summary": "Get details for the specified Shopper",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "shopperId",
               "required": true,
               "paramType": "path",
@@ -158,6 +172,13 @@
           "type": "ShopperId",
           "summary": "Create a Subaccount owned by the authenticated Reseller",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "subaccount",
               "required": true,

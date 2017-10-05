@@ -29,6 +29,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "dataCenterId",
@@ -61,6 +68,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": false,
               "type": "string",
@@ -137,6 +151,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "dataCenterId",
@@ -176,6 +197,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",

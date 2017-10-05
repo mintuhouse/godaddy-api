@@ -22,7 +22,15 @@
               "responseModel": "Error"
             }
           ],
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            }
+          ],
           "type": "Limits",
           "summary": "Get resource limits for your Cloud account",
           "nickname": "getLimits",

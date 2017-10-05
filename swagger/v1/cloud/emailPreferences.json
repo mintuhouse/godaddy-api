@@ -17,7 +17,15 @@
               "responseModel": "EmailPreference"
             }
           ],
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            }
+          ],
           "type": "EmailPreference",
           "summary": "Get the email preferences for the user.",
           "nickname": "getEmailPreferences",
@@ -33,6 +41,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "EmailPreference",

@@ -14,6 +14,13 @@
           "summary": "Add expiry listings into GoDaddy Auction",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "expiryListings",
               "required": true,
               "paramType": "body",
@@ -92,6 +99,13 @@
           "type": "ListingAction",
           "summary": "Remove listings from GoDaddy Auction",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "domains",
               "required": true,

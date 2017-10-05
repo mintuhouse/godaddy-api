@@ -14,6 +14,13 @@
           "summary": "Retrieve details for the specified Subscription",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -109,6 +116,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "subscriptionId",
               "required": true,
               "paramType": "path",
@@ -175,6 +189,13 @@
           "type": "void",
           "summary": "Cancel the specified Subscription",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "X-Shopper-Id",
               "required": false,
@@ -314,6 +335,13 @@
           "summary": "Retrieve a list of Subscriptions for the specified Shopper",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "name": "X-Shopper-Id",
               "required": false,
               "paramType": "header",
@@ -448,6 +476,13 @@
           },
           "summary": "Retrieve a list of ProductGroups for the specified Shopper",
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "name": "X-Shopper-Id",
               "required": false,

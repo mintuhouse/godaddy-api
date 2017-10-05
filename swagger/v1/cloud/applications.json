@@ -29,6 +29,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "applicationId",
@@ -73,6 +80,13 @@
           "type": "CloudApplication",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "CloudApplicationCreate",
               "name": "body",
@@ -100,6 +114,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": false,
               "type": "string",

@@ -29,6 +29,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -61,6 +68,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",
@@ -263,6 +277,13 @@
           "type": "Server",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "ServerCreate",
               "name": "body",
@@ -290,6 +311,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": false,
               "name": "status",
@@ -368,6 +396,13 @@
           "type": "ServerAction",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -422,6 +457,13 @@
           "type": "ServerAction",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -471,6 +513,13 @@
           "type": "ServerAction",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -510,6 +559,13 @@
           "type": "Console",
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -547,6 +603,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",
@@ -587,6 +650,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",
@@ -678,6 +748,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -717,6 +794,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",
@@ -784,6 +868,13 @@
           ],
           "parameters": [
             {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
+            {
               "required": true,
               "type": "string",
               "name": "serverId",
@@ -823,6 +914,13 @@
             }
           ],
           "parameters": [
+            {
+              "name": "Authorization",
+              "required": true,
+              "paramType": "header",
+              "type": "string",
+              "description": "Authorization header value in format 'sso-key <key>:<secret>'"
+            },
             {
               "required": true,
               "type": "string",
